@@ -1,0 +1,24 @@
+name: junitreport
+version: 0.1.0
+description: Generate JUnit XML reports from dart test runs.
+
+authors:
+- Roel Spilker <r.spilker@gmail.com>
+
+homepage: https://github.com/TOPdesk/dart-junitreport
+documentation:
+
+dependencies:
+  xml: '^2.4.3'
+  intl: '^0.12.7+1'
+  testreport: '^0.1.0'
+  args: '^0.13.4+2'
+
+dev_dependencies:
+  test: any
+
+environment:
+  sdk: '>=1.12.0 <2.0.0'
+
+executables:
+  tojunit:

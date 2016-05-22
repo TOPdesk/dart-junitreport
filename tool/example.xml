@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite errors="1" failures="3" tests="7" skipped="1" name="allresults">
+    <properties>
+      <property name="platform" value="vm" />
+    </properties>
+    <testcase classname="allresults" name="succesful test" time="0.026" />
+    <testcase classname="allresults" name="succesful test with output" time="0.003">
+      <system-out>a printed line</system-out>
+      <system-out>and another on printed line</system-out>
+      <system-out>and even
+two in one go</system-out>
+    </testcase>
+    <testcase classname="allresults" name="failing test" time="0.141">
+      <failure message="1 failure, see stacktrace for details">Failure:\n\nExpected: 'two\n'
+  'lines for seeing how it is rendered'
+  Actual: 'two\n'
+  'lines that are not expected'
+   Which: is different.
+Expected: ... wo\nlines for seeing ...
+  Actual: ... wo\nlines that are n ...
+                        ^
+ Differ at offset 11
+</failure>
+    </testcase>
+    <testcase classname="allresults" name="failing test with reason" time="0.03">
+      <failure message="1 failure, see stacktrace for details">Failure:\n\nExpected: 'should fail'
+  Actual: 'fails'
+   Which: is different.
+Expected: should fai ...
+  Actual: fails
+          ^
+ Differ at offset 0
+the failure reason
+</failure>
+    </testcase>
+    <testcase classname="allresults" name="error in test" time="0.036">
+      <error message="Bad state: oops, it failed">tool\example-tests\allresults_test.dart 29:5  main.&lt;fn>
+</error>
+    </testcase>
+    <testcase classname="allresults" name="error test and failure" time="0.037">
+      <failure message="1 failure, see stacktrace for details">Failure:\n\nExpected: 'expected1'
+  Actual: 'actual1'
+   Which: is different.
+Expected: expected1
+  Actual: actual1
+          ^
+ Differ at offset 0
+</failure>
+    </testcase>
+    <testcase classname="allresults" name="skipped top level test" time="0.00">
+      <skipped />
+    </testcase>
+    <system-out>a print outside any test</system-out>
+  </testsuite>
+  <testsuite errors="0" failures="0" tests="1" skipped="0" name="simple">
+    <properties>
+      <property name="platform" value="vm" />
+    </properties>
+    <testcase classname="simple" name="simple" time="0.028" />
+  </testsuite>
+</testsuites>
