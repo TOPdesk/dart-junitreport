@@ -13,8 +13,10 @@ This application can be used to convert the results of dart tests to JUnit xml r
 
 By running
 
-    pub run test simple_test.dart --reporter json > example.json
-    pub global run junitreport:tojunit --input example.json --output TEST-report.xml 
+```Shell
+pub run test simple_test.dart --reporter json > example.json
+pub global run junitreport:tojunit --input example.json --output TEST-report.xml 
+```
 
 and the contents of `simple_test.dart` is
 
@@ -50,6 +52,12 @@ Run `pub global activate junitreport` to download the program and make a launch 
 If the `<dart-cache\bin>` directory is not on your path, you will get a warning, including tips on how to fix it.
 
 Once the directory is on your path, `tojunit --help` should be able to run and produce the program help.
+
+Then you can also use the example above much simpler:
+
+```Shell
+pub run test simple_test.dart --reporter json | tojunit
+```
 
 
 License and contributors
