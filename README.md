@@ -52,12 +52,6 @@ If the `<dart-cache\bin>` derectory is not on your path, you will get a warning,
 Once the directory is on your path, `tojunit --help` should be able to run and produce the program help.
 
 
-Known Problems
---------------
-
-* When the problem is launched via `pub global run junitreport:tojunit` or using the generated launcher `<dart-cache>\bin\tojunit`, stdin is not available, and `--input` must be provided.
-
-
 License and contributors
 ------------------------
 

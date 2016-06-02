@@ -58,7 +58,7 @@ if missing, stdout will be used""")
         help: """
 the timestamp to be used in the report
 - 'now' will use the current date/time
-- 'none' will suppress timestamps altogether-
+- 'none' will suppress timestamps altogether
 - a date formatted 'yyyy-MM-ddThh:mm:ss' will be used as UTC date/time
 - if no value is provided
     - if '-source' is specified the file modification date/time is used
