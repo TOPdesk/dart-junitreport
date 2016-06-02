@@ -24,7 +24,7 @@ packages:
       name: barback
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.15.2+7"
+    version: "0.15.2+8"
   boolean_selector:
     description:
       name: boolean_selector
@@ -36,7 +36,7 @@ packages:
       name: built_collection
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.0.2"
+    version: "1.0.3"
   charcode:
     description:
       name: charcode
@@ -48,7 +48,7 @@ packages:
       name: collection
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.7.0"
+    version: "1.8.0"
   convert:
     description:
       name: convert
@@ -90,7 +90,7 @@ packages:
       name: http_parser
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.0.0"
+    version: "3.0.1"
   intl:
     description:
       name: intl
@@ -216,13 +216,13 @@ packages:
       name: test
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.12.13+1"
+    version: "0.12.13+4"
   testreport:
     description:
       name: testreport
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.1.0"
+    version: "0.2.0"
   typed_data:
     description:
       name: typed_data
