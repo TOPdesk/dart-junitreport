@@ -47,7 +47,7 @@ Installation
 
 Run `pub global activate junitreport` to download the program and make a launch script available: `<dart-cache>\bin\tojunit`.
 
-If the `<dart-cache\bin>` derectory is not on your path, you will get a warning, including tips on how to fix it.
+If the `<dart-cache\bin>` directory is not on your path, you will get a warning, including tips on how to fix it.
 
 Once the directory is on your path, `tojunit --help` should be able to run and produce the program help.
 
