@@ -3,7 +3,6 @@ JUnit Report
 
 * [Introduction](#introduction)
 * [Installation](#installation)
-* [Known Problems](#known-problems)
 * [License and contributors](#license-and-contributors)
 
 Introduction
