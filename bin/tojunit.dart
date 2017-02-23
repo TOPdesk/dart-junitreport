@@ -1,4 +1,4 @@
-// Copyright (c) 2016, TOPdesk. Please see the AUTHORS file for details.
+// Copyright (c) 2017, TOPdesk. Please see the AUTHORS file for details.
 // All rights reserved. Use of this source code is governed by a MIT-style
 // license that can be found in the LICENSE file.
 
@@ -24,6 +24,7 @@ main(List<String> args) async {
   } catch (e) {
     stderr.writeln(e.toString());
     exit(1);
+    return null; // satisfy code analyzers
   }
 }
 
@@ -74,6 +75,7 @@ the timestamp to be used in the report
     if (result['help']) {
       print(parser.usage);
       exit(0);
+      return null; // satisfy code analyzers
     }
 
     var source = _processInput(result['input']);
@@ -92,6 +94,7 @@ the timestamp to be used in the report
     print('\nValid program arguments: ');
     print(parser.usage);
     exit(1);
+    return null; // satisfy code analyzers
   }
 }
 
@@ -110,7 +113,7 @@ DateTime _processTimestamp(String timestamp, _Source source) {
   var format = new DateFormat('yyyy-MM-ddTHH:mm:ss', 'en_US');
   try {
     return format.parseUtc(timestamp);
-  } on FormatException catch (e) {
+  } on FormatException {
     throw new FormatException(
         "'timestamp' should be in the form 'yyyy-MM-ddTHH:mm:ss' UTC");
   }
@@ -126,6 +129,7 @@ _Source _processInput(String input) {
   if (!file.existsSync()) {
     stderr.writeln("File '$input' (${file.absolute.path}) does not exist");
     exit(1);
+    return null; // satisfy code analyzers
   }
   try {
     return new _Source()
@@ -134,6 +138,7 @@ _Source _processInput(String input) {
   } catch (e) {
     stderr.writeln("Cannot read file '$input' (${file.absolute.path})");
     exit(1);
+    return null; // satisfy code analyzers
   }
 }
 
@@ -145,6 +150,7 @@ IOSink _processOutput(String output) {
   } catch (e) {
     stderr.writeln("Cannot write to file '$output' (${file.absolute.path})");
     exit(1);
+    return null; // satisfy code analyzers
   }
 }
 

@@ -22,10 +22,10 @@ class XmlReport implements JUnitReport {
   XmlReport(this.base, this.package);
 
   String toXml(Report report) {
-    var suites = [];
+    var suites = <XmlNode>[];
     for (var suite in report.suites) {
-      var cases = [];
-      var prints = [];
+      var cases = <XmlNode>[];
+      var prints = <XmlNode>[];
       var className = _pathToClassName(suite.path);
 
       for (var test in suite.allTests) {
@@ -34,7 +34,7 @@ class XmlReport implements JUnitReport {
           continue;
         }
 
-        var children = [];
+        List<XmlNode> children = [];
         if (test.isSkipped) children.add(elem('skipped', {}, []));
         if (test.problems.isNotEmpty) children.add(_problems(test.problems));
 
@@ -87,13 +87,13 @@ class XmlReport implements JUnitReport {
         main.replaceAll(_pathSeparator, '.').replaceAll(_dash, '_');
   }
 
-  List<XmlElement> _suiteChildren(
-      String platform, List<XmlElement> cases, List<XmlElement> prints) {
-    var properties = platform == null ? [] : [(_properties(platform))];
+  List<XmlNode> _suiteChildren(
+      String platform, Iterable<XmlNode> cases, Iterable<XmlNode> prints) {
+    var properties = platform == null ? <XmlNode>[] : [(_properties(platform))];
     return properties..addAll(cases)..addAll(prints);
   }
 
-  _prints(Iterable<String> from, List<XmlElement> to) {
+  _prints(Iterable<String> from, List<XmlNode> to) {
     if (from.isNotEmpty) {
       to.add(elem("system-out", {}, [txt(from.join('\n'))]));
     }
