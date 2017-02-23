@@ -6,9 +6,9 @@
     </properties>
     <testcase classname="allresults" name="succesful test" time="0.026" />
     <testcase classname="allresults" name="succesful test with output" time="0.003">
-      <system-out>a printed line</system-out>
-      <system-out>and another on printed line</system-out>
-      <system-out>and even
+      <system-out>a printed line
+and another on printed line
+and even
 two in one go</system-out>
     </testcase>
     <testcase classname="allresults" name="failing test" time="0.141">
