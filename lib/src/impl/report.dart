@@ -93,7 +93,7 @@ class XmlReport implements JUnitReport {
   }
 
   _prints(Iterable<String> from, List<XmlElement> to) {
-    if(from.isNotEmpty) {
+    if (from.isNotEmpty) {
       to.add(elem("system-out", {}, [txt(from.join('\n'))]));
     }
   }
