@@ -1,4 +1,4 @@
-// Copyright (c) 2016, TOPdesk. Please see the AUTHORS file for details.
+// Copyright (c) 2017, TOPdesk. Please see the AUTHORS file for details.
 // All rights reserved. Use of this source code is governed by a MIT-style
 // license that can be found in the LICENSE file.
 
@@ -83,7 +83,8 @@ class XmlReport implements JUnitReport {
       main = main.substring(base.length);
       while (main.startsWith(_pathSeparator)) main = main.substring(1);
     }
-    return package + main.replaceAll(_pathSeparator, '.').replaceAll(_dash, '_');
+    return package +
+        main.replaceAll(_pathSeparator, '.').replaceAll(_dash, '_');
   }
 
   List<XmlElement> _suiteChildren(

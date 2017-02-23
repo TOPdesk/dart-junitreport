@@ -6,7 +6,6 @@ import 'package:testreport/testreport.dart';
 import 'package:junitreport/src/impl/report.dart';
 
 abstract class JUnitReport {
-
   factory JUnitReport({String base, String package}) {
     return new XmlReport(base, package);
   }
