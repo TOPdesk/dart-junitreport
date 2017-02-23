@@ -4,7 +4,6 @@
 .buildlog
 .packages
 .project
-pubspec.lock
 .pub/
 build/
 **/packages/
