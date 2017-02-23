@@ -93,7 +93,9 @@ class XmlReport implements JUnitReport {
   }
 
   _prints(Iterable<String> from, List<XmlElement> to) {
-    from.forEach((print) => to.add(elem("system-out", {}, [txt(print)])));
+    if(from.isNotEmpty) {
+      to.add(elem("system-out", {}, [txt(from.join('\n'))]));
+    }
   }
 
   XmlElement _properties(String platform) {
