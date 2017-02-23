@@ -4,7 +4,6 @@ description: Generate JUnit XML reports from dart test runs.
 
 authors:
 - Roel Spilker <r.spilker@gmail.com>
-- Daniel Varga <dvarga@skawa.hu>
 
 homepage: https://github.com/TOPdesk/dart-junitreport
 documentation:
