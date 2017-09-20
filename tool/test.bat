@@ -1,5 +1,2 @@
-@echo Transforming...
 dart ../bin/tojunit.dart -i example.json -b "tool\example-tests" -t none > actual.xml
-@echo Comparing...
- diff example.xml actual.xml
-@echo Done.
+diff example.xml actual.xml
