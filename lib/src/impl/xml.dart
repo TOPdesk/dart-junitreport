@@ -11,7 +11,7 @@ XmlDocument doc(Iterable<XmlNode> children) {
   ]..addAll(children));
 }
 
-XmlElement elem(
+XmlNode elem(
     String name, Map<String, dynamic> attributes, Iterable<XmlNode> children) {
   List<XmlAttribute> attrs = [];
   attributes.forEach((k, v) => attrs.add(attr(k, v)));

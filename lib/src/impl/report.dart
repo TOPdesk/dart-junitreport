@@ -87,10 +87,12 @@ class XmlReport implements JUnitReport {
         main.replaceAll(_pathSeparator, '.').replaceAll(_dash, '_');
   }
 
-  List<XmlNode> _suiteChildren(
+  Iterable<XmlNode> _suiteChildren(
       String platform, Iterable<XmlNode> cases, Iterable<XmlNode> prints) {
     var properties = platform == null ? <XmlNode>[] : [(_properties(platform))];
-    return properties..addAll(cases)..addAll(prints);
+    return properties
+      ..addAll(cases)
+      ..addAll(prints);    
   }
 
   _prints(Iterable<String> from, List<XmlNode> to) {
@@ -99,13 +101,13 @@ class XmlReport implements JUnitReport {
     }
   }
 
-  XmlElement _properties(String platform) {
+  XmlNode _properties(String platform) {
     return elem('properties', {}, [
       elem('property', {'name': 'platform', 'value': platform}, [])
     ]);
   }
 
-  XmlElement _problems(Iterable<Problem> problems) {
+  XmlNode _problems(Iterable<Problem> problems) {
     if (problems.length == 1) {
       var problem = problems.first;
       var message = problem.message;
