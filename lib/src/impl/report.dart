@@ -1,4 +1,4 @@
-// Copyright (c) 2017, TOPdesk. Please see the AUTHORS file for details.
+// Copyright (c) 2017-2018, TOPdesk. Please see the AUTHORS file for details.
 // All rights reserved. Use of this source code is governed by a MIT-style
 // license that can be found in the LICENSE file.
 
@@ -14,7 +14,7 @@ class XmlReport implements JUnitReport {
   static final DateFormat _dateFormat =
       new DateFormat('yyyy-MM-ddTHH:mm:ss', 'en_US');
   static final Pattern _pathSeparator = new RegExp(r'[\\/]');
-  static final Pattern _dash = new RegExp(r'\-');
+  static final Pattern _dash = new RegExp(r'-');
 
   final String base;
   final String package;
@@ -89,7 +89,8 @@ class XmlReport implements JUnitReport {
 
   List<XmlNode> _suiteChildren(
       String platform, Iterable<XmlNode> cases, Iterable<XmlNode> prints) {
-    var properties = platform == null ? <XmlNode>[] : <XmlNode>[(_properties(platform))];
+    var properties =
+        platform == null ? <XmlNode>[] : <XmlNode>[(_properties(platform))];
     return properties..addAll(cases)..addAll(prints);
   }
 
