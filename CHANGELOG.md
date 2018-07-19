@@ -1,3 +1,10 @@
+## 0.3.1
+* support for Dart 2.0
+* updated dependencies:
+  * xml: '^3.0.0'
+  * intl: '^0.15.5'
+  * args: '^1.4.4'
+
 ## 0.3.0
 * updated dependencies:
   * sdk: '>=1.19.0 <2.0.0'

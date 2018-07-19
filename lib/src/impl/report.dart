@@ -89,7 +89,7 @@ class XmlReport implements JUnitReport {
 
   List<XmlNode> _suiteChildren(
       String platform, Iterable<XmlNode> cases, Iterable<XmlNode> prints) {
-    var properties = platform == null ? <XmlNode>[] : [(_properties(platform))];
+    var properties = platform == null ? <XmlNode>[] : <XmlNode>[(_properties(platform))];
     return properties..addAll(cases)..addAll(prints);
   }
 
