@@ -1,4 +1,4 @@
-// Copyright (c) 2017, TOPdesk. Please see the AUTHORS file for details.
+// Copyright (c) 2017-2018, TOPdesk. Please see the AUTHORS file for details.
 // All rights reserved. Use of this source code is governed by a MIT-style
 // license that can be found in the LICENSE file.
 
@@ -10,7 +10,7 @@ import 'package:intl/intl.dart';
 import 'package:junitreport/junitreport.dart';
 import 'package:testreport/testreport.dart';
 
-main(List<String> args) async {
+Future<Null> main(List<String> args) async {
   var arguments = parseArguments(args);
 
   Stream<String> lines =
@@ -24,13 +24,14 @@ main(List<String> args) async {
   } catch (e) {
     stderr.writeln(e.toString());
     exit(1);
-    return null; // satisfy code analyzers
   }
 }
 
 Future<Report> createReport(Arguments arguments, Stream<String> lines) async {
   var processor = new Processor(timestamp: arguments.timestamp);
-  await for (String line in lines) processor.process(JSON.decode(line));
+  await for (String line in lines) {
+    processor.process(JSON.decode(line) as Map<String, dynamic>);
+  }
   return processor.report;
 }
 
@@ -72,19 +73,19 @@ the timestamp to be used in the report
 
   try {
     var result = parser.parse(args);
-    if (result['help']) {
+    if (result['help'] as bool) {
       print(parser.usage);
       exit(0);
       return null; // satisfy code analyzers
     }
 
-    var source = _processInput(result['input']);
-    var target = _processOutput(result['output']);
+    var source = _processInput(result['input'] as String);
+    var target = _processOutput(result['output'] as String);
 
-    var timestamp = _processTimestamp(result['timestamp'], source);
+    var timestamp = _processTimestamp(result['timestamp'] as String, source);
     var package = _processPackage(result);
     return new Arguments()
-      ..base = result['base']
+      ..base = result['base'] as String
       ..package = package
       ..timestamp = timestamp
       ..source = source.source
@@ -99,7 +100,7 @@ the timestamp to be used in the report
 }
 
 String _processPackage(ArgResults result) {
-  var package = result['package'];
+  var package = result['package'] as String;
   if (package.isNotEmpty && !package.endsWith('.')) package += '.';
   return package;
 }

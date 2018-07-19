@@ -15,6 +15,8 @@ class XmlReport implements JUnitReport {
       new DateFormat('yyyy-MM-ddTHH:mm:ss', 'en_US');
   static final Pattern _pathSeparator = new RegExp(r'[\\/]');
   static final Pattern _dash = new RegExp(r'-');
+  static const Map<String, dynamic> _noAttributes = const <String, dynamic>{};
+  static const Iterable<XmlNode> _noChildren = const <XmlNode>[];
 
   final String base;
   final String package;
@@ -34,22 +36,24 @@ class XmlReport implements JUnitReport {
           continue;
         }
 
-        List<XmlNode> children = [];
-        if (test.isSkipped) children.add(elem('skipped', {}, []));
+        var children = <XmlNode>[];
+        if (test.isSkipped) {
+          children.add(elem('skipped', _noAttributes, _noChildren));
+        }
         if (test.problems.isNotEmpty) children.add(_problems(test.problems));
 
         _prints(test.prints, children);
 
         cases.add(elem(
             "testcase",
-            {
+            <String, dynamic>{
               'classname': className,
               'name': test.name,
               'time': _milliseconds.format((test.duration) / 1000.0)
             },
             children));
       }
-      var attributes = {
+      var attributes = <String, dynamic>{
         'errors': suite.problems
             .where((t) => !t.problems.every((p) => p.isFailure))
             .length,
@@ -66,7 +70,7 @@ class XmlReport implements JUnitReport {
       suites.add(elem('testsuite', attributes,
           _suiteChildren(suite.platform, cases, prints)));
     }
-    return toXmlString(doc([elem('testsuites', {}, suites)]));
+    return toXmlString(doc([elem('testsuites', _noAttributes, suites)]));
   }
 
   String _pathToClassName(String path) {
@@ -94,15 +98,17 @@ class XmlReport implements JUnitReport {
     return properties..addAll(cases)..addAll(prints);
   }
 
-  _prints(Iterable<String> from, List<XmlNode> to) {
+  void _prints(Iterable<String> from, List<XmlNode> to) {
     if (from.isNotEmpty) {
-      to.add(elem("system-out", {}, [txt(from.join('\n'))]));
+      to.add(
+          elem("system-out", _noAttributes, <XmlNode>[txt(from.join('\n'))]));
     }
   }
 
   XmlElement _properties(String platform) {
-    return elem('properties', {}, [
-      elem('property', {'name': 'platform', 'value': platform}, [])
+    return elem('properties', _noAttributes, <XmlNode>[
+      elem('property', <String, dynamic>{'name': 'platform', 'value': platform},
+          _noChildren)
     ]);
   }
 
@@ -112,18 +118,24 @@ class XmlReport implements JUnitReport {
       var message = problem.message;
       if (message != null && !message.contains('\n')) {
         var stacktrace = problem.stacktrace;
-        return elem(problem.isFailure ? 'failure' : 'error',
-            {'message': message}, stacktrace == null ? [] : [txt(stacktrace)]);
+        return elem(
+            problem.isFailure ? 'failure' : 'error',
+            <String, dynamic>{'message': message},
+            stacktrace == null ? _noChildren : <XmlNode>[txt(stacktrace)]);
       }
     }
 
     var failures = problems.where((p) => p.isFailure);
     var errors = problems.where((p) => !p.isFailure);
-    var details = []..addAll(_details(failures))..addAll(_details(errors));
+    var details = <String>[]
+      ..addAll(_details(failures))
+      ..addAll(_details(errors));
 
     var type = errors.length == 0 ? 'failure' : 'error';
-    return elem(type, {'message': _message(failures.length, errors.length)},
-        [txt(details.join(r'\n\n\n'))]);
+    return elem(
+        type,
+        <String, dynamic>{'message': _message(failures.length, errors.length)},
+        <XmlNode>[txt(details.join(r'\n\n\n'))]);
   }
 
   Iterable<String> _details(Iterable<Problem> problems) {
@@ -132,11 +144,11 @@ class XmlReport implements JUnitReport {
     return problems.map((p) => _report(more, ++count, p));
   }
 
-  String _report(bool more, index, Problem problem) {
+  String _report(bool more, int index, Problem problem) {
     var message = problem.message ?? '';
     var stacktrace = problem.stacktrace ?? '';
     var short = '';
-    var long = null;
+    String long = null;
     if (message.isEmpty) {
       if (stacktrace.isEmpty) short = ' no details available';
     } else if (!message.contains('\n')) {
@@ -146,7 +158,7 @@ class XmlReport implements JUnitReport {
     }
     if (message.isNotEmpty && problem.isFailure) stacktrace = '';
 
-    var report = [];
+    var report = <String>[];
     var type = problem.isFailure ? 'Failure' : 'Error';
     if (more) {
       report.add('$type #$index:$short');
@@ -159,7 +171,7 @@ class XmlReport implements JUnitReport {
   }
 
   String _message(int failures, int errors) {
-    var texts = [];
+    var texts = <String>[];
     if (failures == 1) texts.add('1 failure');
     if (failures > 1) texts.add('$failures failures');
     if (errors == 1) texts.add('1 error');

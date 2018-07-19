@@ -1,4 +1,4 @@
-// Copyright (c) 2016-2017, TOPdesk. Please see the AUTHORS file for details.
+// Copyright (c) 2016-2018, TOPdesk. Please see the AUTHORS file for details.
 // All rights reserved. Use of this source code is governed by a MIT-style
 // license that can be found in the LICENSE file.
 
@@ -13,8 +13,8 @@ XmlDocument doc(Iterable<XmlNode> children) {
 
 XmlElement elem(
     String name, Map<String, dynamic> attributes, Iterable<XmlNode> children) {
-  List<XmlAttribute> attrs = [];
-  attributes.forEach((k, v) => attrs.add(attr(k, v)));
+  var attrs = <XmlAttribute>[];
+  attributes.forEach((k, dynamic v) => attrs.add(attr(k, v)));
   return new XmlElement(_name(name), attrs, children);
 }
 
