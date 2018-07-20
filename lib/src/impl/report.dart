@@ -23,6 +23,7 @@ class XmlReport implements JUnitReport {
 
   XmlReport(this.base, this.package);
 
+  @override
   String toXml(Report report) {
     var suites = <XmlNode>[];
     for (var suite in report.suites) {
@@ -148,7 +149,7 @@ class XmlReport implements JUnitReport {
     var message = problem.message ?? '';
     var stacktrace = problem.stacktrace ?? '';
     var short = '';
-    String long = null;
+    String long;
     if (message.isEmpty) {
       if (stacktrace.isEmpty) short = ' no details available';
     } else if (!message.contains('\n')) {
