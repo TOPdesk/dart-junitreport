@@ -210,7 +210,7 @@ packages:
       name: pub_semver
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.4.1"
+    version: "1.4.2"
   shelf:
     description:
       name: shelf
@@ -240,7 +240,7 @@ packages:
       name: source_map_stack_trace
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.1.4"
+    version: "1.1.5"
   source_maps:
     description:
       name: source_maps
@@ -258,7 +258,7 @@ packages:
       name: stack_trace
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.9.2"
+    version: "1.9.3"
   stream_channel:
     description:
       name: stream_channel
@@ -288,7 +288,7 @@ packages:
       name: testreport
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.3.0"
+    version: "0.3.1"
   typed_data:
     description:
       name: typed_data
