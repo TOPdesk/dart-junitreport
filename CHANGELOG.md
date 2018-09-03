@@ -1,3 +1,6 @@
+## 0.3.3
+* more dart 2.0 support
+
 ## 0.3.2
 * updated dependencies:
   * testreport: '^0.3.1'

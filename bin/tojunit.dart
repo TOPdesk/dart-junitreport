@@ -10,11 +10,14 @@ import 'package:intl/intl.dart';
 import 'package:junitreport/junitreport.dart';
 import 'package:testreport/testreport.dart';
 
+const Utf8Codec _utf8 = const Utf8Codec();
+const JsonCodec _json = const JsonCodec();
+
 Future<Null> main(List<String> args) async {
   var arguments = parseArguments(args);
 
   Stream<String> lines =
-      arguments.source.transform(UTF8.decoder).transform(new LineSplitter());
+      arguments.source.transform(_utf8.decoder).transform(new LineSplitter());
 
   try {
     var report = await createReport(arguments, lines);
@@ -30,7 +33,7 @@ Future<Null> main(List<String> args) async {
 Future<Report> createReport(Arguments arguments, Stream<String> lines) async {
   var processor = new Processor(timestamp: arguments.timestamp);
   await for (String line in lines) {
-    processor.process(JSON.decode(line) as Map<String, dynamic>);
+    processor.process(_json.decode(line) as Map<String, dynamic>);
   }
   return processor.report;
 }
