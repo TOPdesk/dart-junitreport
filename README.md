@@ -42,6 +42,7 @@ this program will generate 'TEST-report.xml' containing
 </testsuites>
 ```
 
+For transforming Flutter tests reports, instead of passing `--reporter json`, you need to use `--machine`.
 
 Installation
 ------------
@@ -58,6 +59,11 @@ Then you can also use the example above much simpler:
 pub run test simple_test.dart --reporter json | tojunit
 ```
 
+And to run all tests for Flutter:
+
+```Shell
+flutter test --machine | tojunit
+```
 
 License and contributors
 ------------------------
