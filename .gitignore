@@ -13,6 +13,7 @@ doc/api/
 
 # JetBrains IDE
 .idea
+/.dart_tool/
 
 # Test artifacts
-tool/actual.xml
+/tool/actual.xml
