@@ -40,14 +40,10 @@ Future<Report> createReport(Arguments arguments, Stream<String> lines) async {
 
 Arguments parseArguments(List<String> args) {
   var parser = new ArgParser()
-    ..addOption('input',
-        abbr: 'i',
-        help: """
+    ..addOption('input', abbr: 'i', help: """
 the path to the 'json' file containing the output of 'pub run test'.
 if missing, <stdin> will be used""")
-    ..addOption('output',
-        abbr: 'o',
-        help: """
+    ..addOption('output', abbr: 'o', help: """
 the path of the to be generated junit xml file.
 if missing, <stdout> will be used""")
     ..addOption('base',
@@ -58,9 +54,7 @@ if missing, <stdout> will be used""")
         abbr: 'p',
         help: "the part to prepend to the 'path' elements in the source",
         defaultsTo: '')
-    ..addOption('timestamp',
-        abbr: 't',
-        help: """
+    ..addOption('timestamp', abbr: 't', help: """
 the timestamp to be used in the report
 - 'now' will use the current date/time
 - 'none' will suppress timestamps altogether
