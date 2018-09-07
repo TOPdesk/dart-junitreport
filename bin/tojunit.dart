@@ -44,12 +44,12 @@ Arguments parseArguments(List<String> args) {
         abbr: 'i',
         help: """
 the path to the 'json' file containing the output of 'pub run test'.
-if missing, stdin will be used""")
+if missing, <stdin> will be used""")
     ..addOption('output',
         abbr: 'o',
         help: """
 the path of the to be generated junit xml file.
-if missing, stdout will be used""")
+if missing, <stdout> will be used""")
     ..addOption('base',
         abbr: 'b',
         help: "the part to strip from the 'path' elements in the source",
@@ -66,7 +66,7 @@ the timestamp to be used in the report
 - 'none' will suppress timestamps altogether
 - a date formatted 'yyyy-MM-ddThh:mm:ss' will be used as UTC date/time
 - if no value is provided
-    - if '-source' is specified the file modification date/time is used
+    - if '--input' is specified the file modification date/time is used
     - otherwise the current date/time is used""")
     ..addFlag('help',
         abbr: 'h',
