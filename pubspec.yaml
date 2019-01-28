@@ -1,5 +1,5 @@
 name: junitreport
-version: 0.3.4-dev
+version: 1.0.0
 description: Generate JUnit XML reports from dart test runs.
 
 authors:
@@ -18,7 +18,7 @@ dev_dependencies:
   test: any
 
 environment:
-  sdk: '>=1.19.0 <3.0.0'
+  sdk: '>=2.1.0 <3.0.0'
 
 executables:
   tojunit:

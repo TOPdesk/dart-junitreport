@@ -1,3 +1,7 @@
+## 1.0.0
+- force Dart 2.1+
+- update dependency xml: '^3.3.0', fix problem with pretty printer
+
 ## 0.3.3
 * more dart 2.0 support
 
