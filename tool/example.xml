@@ -2,9 +2,9 @@
 <testsuites>
   <testsuite errors="1" failures="3" tests="7" skipped="1" name="allresults">
     <properties>
-      <property name="platform" value="vm" />
+      <property name="platform" value="vm"/>
     </properties>
-    <testcase classname="allresults" name="succesful test" time="0.026" />
+    <testcase classname="allresults" name="succesful test" time="0.026"/>
     <testcase classname="allresults" name="succesful test with output" time="0.003">
       <system-out>a printed line
 and another on printed line
@@ -49,14 +49,14 @@ Expected: expected1
 </failure>
     </testcase>
     <testcase classname="allresults" name="skipped top level test" time="0.00">
-      <skipped />
+      <skipped/>
     </testcase>
     <system-out>a print outside any test</system-out>
   </testsuite>
   <testsuite errors="0" failures="0" tests="1" skipped="0" name="simple">
     <properties>
-      <property name="platform" value="vm" />
+      <property name="platform" value="vm"/>
     </properties>
-    <testcase classname="simple" name="simple" time="0.028" />
+    <testcase classname="simple" name="simple" time="0.028"/>
   </testsuite>
 </testsuites>

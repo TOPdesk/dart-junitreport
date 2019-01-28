@@ -25,9 +25,7 @@ linter:
     - prefer_is_not_empty
     - recursive_getters
     - slash_for_doc_comments
-    - sort_constructors_first
     - throw_in_finally
-    - unnecessary_brace_in_string_interp
     - unrelated_type_equality_checks
     - use_rethrow_when_possible
     - valid_regexps
