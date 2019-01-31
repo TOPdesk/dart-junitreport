@@ -1,4 +1,4 @@
-// Copyright (c) 2017-2018, TOPdesk. Please see the AUTHORS file for details.
+// Copyright (c) 2017-2019, TOPdesk. Please see the AUTHORS file for details.
 // All rights reserved. Use of this source code is governed by a MIT-style
 // license that can be found in the LICENSE file.
 
@@ -10,14 +10,11 @@ import 'package:intl/intl.dart';
 import 'package:junitreport/junitreport.dart';
 import 'package:testreport/testreport.dart';
 
-const Utf8Codec _utf8 = const Utf8Codec();
-const JsonCodec _json = const JsonCodec();
-
 Future<Null> main(List<String> args) async {
   var arguments = parseArguments(args);
 
   Stream<String> lines =
-      arguments.source.transform(_utf8.decoder).transform(new LineSplitter());
+      arguments.source.transform(utf8.decoder).transform(new LineSplitter());
 
   try {
     var report = await createReport(arguments, lines);
@@ -33,7 +30,7 @@ Future<Null> main(List<String> args) async {
 Future<Report> createReport(Arguments arguments, Stream<String> lines) async {
   var processor = new Processor(timestamp: arguments.timestamp);
   await for (String line in lines) {
-    processor.process(_json.decode(line) as Map<String, dynamic>);
+    processor.process(json.decode(line) as Map<String, dynamic>);
   }
   return processor.report;
 }

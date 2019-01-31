@@ -343,7 +343,7 @@ packages:
       name: testreport
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.3.1"
+    version: "1.0.0"
   typed_data:
     dependency: transitive
     description:
@@ -385,7 +385,7 @@ packages:
       name: xml
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.3.0"
+    version: "3.3.1"
   yaml:
     dependency: transitive
     description:

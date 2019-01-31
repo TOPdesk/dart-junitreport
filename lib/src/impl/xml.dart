@@ -3,7 +3,6 @@
 // license that can be found in the LICENSE file.
 
 import 'package:xml/xml.dart';
-import 'package:xml/src/xml/visitors/pretty_writer.dart';
 
 XmlDocument doc(Iterable<XmlNode> children) {
   return new XmlDocument([

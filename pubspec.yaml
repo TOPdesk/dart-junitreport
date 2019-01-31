@@ -9,10 +9,10 @@ homepage: https://github.com/TOPdesk/dart-junitreport
 documentation:
 
 dependencies:
-  xml: '^3.3.0'
-  intl: '^0.15.5'
-  testreport: '^0.3.1'
-  args: '^1.4.4'
+  xml: '^3.3.1'
+  intl: '^0.15.7'
+  testreport: '^1.0.0'
+  args: '^1.5.1'
 
 dev_dependencies:
   test: any
