@@ -86,7 +86,9 @@ class XmlReport implements JUnitReport {
 
     if (base.isNotEmpty && main.startsWith(base)) {
       main = main.substring(base.length);
-      while (main.startsWith(_pathSeparator)) main = main.substring(1);
+      while (main.startsWith(_pathSeparator)) {
+        main = main.substring(1);
+      }
     }
     return package +
         main.replaceAll(_pathSeparator, '.').replaceAll(_dash, '_');
@@ -132,7 +134,7 @@ class XmlReport implements JUnitReport {
       ..addAll(_details(failures))
       ..addAll(_details(errors));
 
-    var type = errors.length == 0 ? 'failure' : 'error';
+    var type = errors.isEmpty ? 'failure' : 'error';
     return elem(
         type,
         <String, dynamic>{'message': _message(failures.length, errors.length)},
