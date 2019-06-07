@@ -1,3 +1,8 @@
+## 1.0.2
+* updated dependencies:
+  * intl: '^0.15.8'
+  * args: '^1.5.2'
+
 ## 1.0.1
 * updated dependencies:
   *  xml: '^3.3.1'
