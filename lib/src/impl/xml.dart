@@ -22,10 +22,6 @@ XmlAttribute attr(String name, dynamic value) =>
 
 XmlText txt(String text) => new XmlText(text);
 
-String toXmlString(XmlDocument document) {
-  var buffer = new StringBuffer();
-  document.accept(new XmlPrettyWriter(buffer, 0, '  '));
-  return buffer.toString();
-}
+String toXmlString(XmlDocument document) => document.toXmlString(pretty: true);
 
 XmlName _name(String name) => new XmlName.fromString(name);
