@@ -132,7 +132,8 @@ class XmlReport implements JUnitReport {
     var errors = problems.where((p) => !p.isFailure);
     var details = <String>[
       ..._details(failures),
-      ..._details(errors)];
+      ..._details(errors),
+    ];
 
     var type = errors.isEmpty ? 'failure' : 'error';
     return elem(
