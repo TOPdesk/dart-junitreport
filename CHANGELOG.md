@@ -1,3 +1,6 @@
+## 1.0.3
+* use different way to pretty-print the generated XML, that is also compatible with xml 3.6.0
+
 ## 1.0.2
 * updated dependencies:
   * intl: '^0.15.8'
