@@ -4,24 +4,29 @@
 
 import 'package:xml/xml.dart';
 
-XmlDocument doc(Iterable<XmlNode> children) {
-  return new XmlDocument([
-    new XmlProcessing('xml', 'version="1.0" encoding="UTF-8"')
-  ]..addAll(children));
-}
+XmlDocument doc(Iterable<XmlNode> children) => XmlDocument([
+      XmlProcessing('xml', 'version="1.0" encoding="UTF-8"'),
+      ...children,
+    ]);
 
 XmlElement elem(
-    String name, Map<String, dynamic> attributes, Iterable<XmlNode> children) {
-  var attrs = <XmlAttribute>[];
-  attributes.forEach((k, dynamic v) => attrs.add(attr(k, v)));
-  return new XmlElement(_name(name), attrs, children);
-}
+  String name,
+  Map<String, dynamic> attributes,
+  Iterable<XmlNode> children,
+) =>
+    XmlElement(
+      _name(name),
+      attributes.entries.map<XmlAttribute>(
+        (MapEntry<String, dynamic> e) => attr(e.key, e.value),
+      ),
+      children,
+    );
 
 XmlAttribute attr(String name, dynamic value) =>
-    new XmlAttribute(_name(name), value.toString());
+    XmlAttribute(_name(name), value.toString());
 
-XmlText txt(String text) => new XmlText(text);
+XmlText txt(String text) => XmlText(text);
 
 String toXmlString(XmlDocument document) => document.toXmlString(pretty: true);
 
-XmlName _name(String name) => new XmlName.fromString(name);
+XmlName _name(String name) => XmlName.fromString(name);

@@ -1,3 +1,6 @@
+## 1.1.0
+* require Dart 2.3+
+
 ## 1.0.3
 * use different way to pretty-print the generated XML, that is also compatible with xml 3.6.0
 

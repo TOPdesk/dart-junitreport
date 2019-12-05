@@ -14,11 +14,11 @@ Future<Null> main(List<String> args) async {
   var arguments = parseArguments(args);
 
   Stream<String> lines =
-      arguments.source.transform(utf8.decoder).transform(new LineSplitter());
+      arguments.source.transform(utf8.decoder).transform(LineSplitter());
 
   try {
     var report = await createReport(arguments, lines);
-    var xml = new JUnitReport(base: arguments.base, package: arguments.package)
+    var xml = JUnitReport(base: arguments.base, package: arguments.package)
         .toXml(report);
     arguments.target.write(xml);
   } catch (e) {
@@ -28,7 +28,7 @@ Future<Null> main(List<String> args) async {
 }
 
 Future<Report> createReport(Arguments arguments, Stream<String> lines) async {
-  var processor = new Processor(timestamp: arguments.timestamp);
+  var processor = Processor(timestamp: arguments.timestamp);
   await for (String line in lines) {
     processor.process(json.decode(line) as Map<String, dynamic>);
   }
@@ -36,7 +36,7 @@ Future<Report> createReport(Arguments arguments, Stream<String> lines) async {
 }
 
 Arguments parseArguments(List<String> args) {
-  var parser = new ArgParser()
+  var parser = ArgParser()
     ..addOption('input', abbr: 'i', help: """
 the path to the 'json' file containing the output of 'pub run test'.
 if missing, <stdin> will be used""")
@@ -78,7 +78,7 @@ the timestamp to be used in the report
 
     var timestamp = _processTimestamp(result['timestamp'] as String, source);
     var package = _processPackage(result);
-    return new Arguments()
+    return Arguments()
       ..base = result['base'] as String
       ..package = package
       ..timestamp = timestamp
@@ -104,30 +104,30 @@ DateTime _processTimestamp(String timestamp, _Source source) {
     return source.timestamp;
   }
   if (timestamp == 'none') return null;
-  if (timestamp == 'now') return new DateTime.now();
-  var format = new DateFormat('yyyy-MM-ddTHH:mm:ss', 'en_US');
+  if (timestamp == 'now') return DateTime.now();
+  var format = DateFormat('yyyy-MM-ddTHH:mm:ss', 'en_US');
   try {
     return format.parseUtc(timestamp);
   } on FormatException {
-    throw new FormatException(
+    throw FormatException(
         "'timestamp' should be in the form 'yyyy-MM-ddTHH:mm:ss' UTC");
   }
 }
 
 _Source _processInput(String input) {
   if (input == null) {
-    return new _Source()
+    return _Source()
       ..source = stdin
-      ..timestamp = new DateTime.now();
+      ..timestamp = DateTime.now();
   }
-  var file = new File(input);
+  var file = File(input);
   if (!file.existsSync()) {
     stderr.writeln("File '$input' (${file.absolute.path}) does not exist");
     exit(1);
     return null; // satisfy code analyzers
   }
   try {
-    return new _Source()
+    return _Source()
       ..source = file.openRead()
       ..timestamp = file.lastModifiedSync();
   } catch (e) {
@@ -139,7 +139,7 @@ _Source _processInput(String input) {
 
 IOSink _processOutput(String output) {
   if (output == null) return stdout;
-  var file = new File(output);
+  var file = File(output);
   try {
     return file.openWrite();
   } catch (e) {

@@ -26,12 +26,12 @@ void main() {
   });
 
   test('error in test', () {
-    throw new StateError('oops, it failed');
+    throw StateError('oops, it failed');
   });
 
   test('error test and failure', () {
     expect('actual1', 'expected1');
-    throw new ArgumentError('the error');
+    throw ArgumentError('the error');
   });
 
   test('skipped top level test', () {}, skip: 'reason for skipping');

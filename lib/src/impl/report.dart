@@ -1,4 +1,4 @@
-// Copyright (c) 2017-2018, TOPdesk. Please see the AUTHORS file for details.
+// Copyright (c) 2017-2019, TOPdesk. Please see the AUTHORS file for details.
 // All rights reserved. Use of this source code is governed by a MIT-style
 // license that can be found in the LICENSE file.
 
@@ -9,14 +9,13 @@ import 'package:junitreport/junitreport.dart';
 import 'package:junitreport/src/impl/xml.dart';
 
 class XmlReport implements JUnitReport {
-  static final NumberFormat _milliseconds =
-      new NumberFormat('#####0.00#', "en_US");
+  static final NumberFormat _milliseconds = NumberFormat('#####0.00#', "en_US");
   static final DateFormat _dateFormat =
-      new DateFormat('yyyy-MM-ddTHH:mm:ss', 'en_US');
-  static final Pattern _pathSeparator = new RegExp(r'[\\/]');
-  static final Pattern _dash = new RegExp(r'-');
-  static const Map<String, dynamic> _noAttributes = const <String, dynamic>{};
-  static const Iterable<XmlNode> _noChildren = const <XmlNode>[];
+      DateFormat('yyyy-MM-ddTHH:mm:ss', 'en_US');
+  static final Pattern _pathSeparator = RegExp(r'[\\/]');
+  static final Pattern _dash = RegExp(r'-');
+  static const Map<String, dynamic> _noAttributes = <String, dynamic>{};
+  static const Iterable<XmlNode> _noChildren = <XmlNode>[];
 
   final String base;
   final String package;
@@ -108,12 +107,13 @@ class XmlReport implements JUnitReport {
     }
   }
 
-  XmlElement _properties(String platform) {
-    return elem('properties', _noAttributes, <XmlNode>[
-      elem('property', <String, dynamic>{'name': 'platform', 'value': platform},
-          _noChildren)
-    ]);
-  }
+  XmlElement _properties(String platform) =>
+      elem('properties', _noAttributes, <XmlNode>[
+        elem(
+            'property',
+            <String, dynamic>{'name': 'platform', 'value': platform},
+            _noChildren)
+      ]);
 
   XmlElement _problems(Iterable<Problem> problems) {
     if (problems.length == 1) {
@@ -130,9 +130,9 @@ class XmlReport implements JUnitReport {
 
     var failures = problems.where((p) => p.isFailure);
     var errors = problems.where((p) => !p.isFailure);
-    var details = <String>[]
-      ..addAll(_details(failures))
-      ..addAll(_details(errors));
+    var details = <String>[
+      ..._details(failures),
+      ..._details(errors)];
 
     var type = errors.isEmpty ? 'failure' : 'error';
     return elem(
