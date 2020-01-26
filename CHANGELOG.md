@@ -1,3 +1,10 @@
+## 1.2.0
+* require Dart 2.7+
+* updated dependencies:
+  * intl: '^0.16.1'
+  * xml: '^3.7.0'
+  * testreport: '^1.2.0'
+
 ## 1.1.0
 * require Dart 2.3+
 
@@ -6,15 +13,15 @@
 
 ## 1.0.2
 * updated dependencies:
-  * intl: '^0.15.8'
   * args: '^1.5.2'
+  * intl: '^0.15.8'
 
 ## 1.0.1
 * updated dependencies:
-  *  xml: '^3.3.1'
+  *  args: '^1.5.1'
   *  intl: '^0.15.7'
   *  testreport: '^1.0.0'
-  *  args: '^1.5.1'
+  *  xml: '^3.3.1'
 
 ## 1.0.0
 * force Dart 2.1+
@@ -30,16 +37,16 @@
 ## 0.3.1
 * support for Dart 2.0
 * updated dependencies:
-  * xml: '^3.0.0'
-  * intl: '^0.15.5'
   * args: '^1.4.4'
+  * intl: '^0.15.5'
+  * xml: '^3.0.0'
 
 ## 0.3.0
 * updated dependencies:
   * sdk: '>=1.19.0 <2.0.0'
-  * xml: '^2.6.0'
   * intl: '^0.15.0'
   * testreport: '^0.3.0'
+  * xml: '^2.6.0'
 * removed transitive dependencies on 'build_collection' and 'quiver'
 
 
