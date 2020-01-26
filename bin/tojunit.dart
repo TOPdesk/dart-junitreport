@@ -13,9 +13,7 @@ import 'package:testreport/testreport.dart';
 Future<Null> main(List<String> args) async {
   var arguments = parseArguments(args);
 
-  Stream<String> lines =
-      arguments.source.transform(utf8.decoder).transform(LineSplitter());
-
+  var lines = LineSplitter().bind(utf8.decoder.bind(arguments.source));
   try {
     var report = await createReport(arguments, lines);
     var xml = JUnitReport(base: arguments.base, package: arguments.package)
@@ -40,9 +38,9 @@ Arguments parseArguments(List<String> args) {
     ..addOption('input', abbr: 'i', help: """
 the path to the 'json' file containing the output of 'pub run test'.
 if missing, <stdin> will be used""")
-    ..addOption('output', abbr: 'o', help: """
+    ..addOption('output', abbr: 'o', help: '''
 the path of the to be generated junit xml file.
-if missing, <stdout> will be used""")
+if missing, <stdout> will be used''')
     ..addOption('base',
         abbr: 'b',
         help: "the part to strip from the 'path' elements in the source",

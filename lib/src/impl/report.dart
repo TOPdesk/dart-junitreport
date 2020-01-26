@@ -9,7 +9,7 @@ import 'package:junitreport/junitreport.dart';
 import 'package:junitreport/src/impl/xml.dart';
 
 class XmlReport implements JUnitReport {
-  static final NumberFormat _milliseconds = NumberFormat('#####0.00#', "en_US");
+  static final NumberFormat _milliseconds = NumberFormat('#####0.00#', 'en_US');
   static final DateFormat _dateFormat =
       DateFormat('yyyy-MM-ddTHH:mm:ss', 'en_US');
   static final Pattern _pathSeparator = RegExp(r'[\\/]');
@@ -45,7 +45,7 @@ class XmlReport implements JUnitReport {
         _prints(test.prints, children);
 
         cases.add(elem(
-            "testcase",
+            'testcase',
             <String, dynamic>{
               'classname': className,
               'name': test.name,
@@ -103,7 +103,7 @@ class XmlReport implements JUnitReport {
   void _prints(Iterable<String> from, List<XmlNode> to) {
     if (from.isNotEmpty) {
       to.add(
-          elem("system-out", _noAttributes, <XmlNode>[txt(from.join('\n'))]));
+          elem('system-out', _noAttributes, <XmlNode>[txt(from.join('\n'))]));
     }
   }
 
@@ -143,8 +143,8 @@ class XmlReport implements JUnitReport {
   }
 
   Iterable<String> _details(Iterable<Problem> problems) {
-    bool more = problems.length > 1;
-    int count = 0;
+    final more = problems.length > 1;
+    var count = 0;
     return problems.map((p) => _report(more, ++count, p));
   }
 
