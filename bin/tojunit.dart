@@ -28,6 +28,9 @@ Future<Null> main(List<String> args) async {
 Future<Report> createReport(Arguments arguments, Stream<String> lines) async {
   var processor = Processor(timestamp: arguments.timestamp);
   await for (String line in lines) {
+    if (!line.startsWith('{')) {
+      continue;
+    }
     processor.process(json.decode(line) as Map<String, dynamic>);
   }
   return processor.report;
