@@ -7,7 +7,7 @@ homepage: https://github.com/TOPdesk/dart-junitreport
 documentation:
 
 dependencies:
-  args: ^1.5.2
+  args: ^1.6.0
   intl: ^0.16.1
   testreport: ^1.2.0
   xml: ^3.7.0
