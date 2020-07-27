@@ -1,8 +1,6 @@
 name: junitreport
 version: 1.3.1-dev
-description:
-  Generate JUnit XML reports from dart test runs. Transforms the output of dart or flutter tests to
-  JUnit style XML
+description: Generate JUnit XML reports from dart test runs. Transforms the output of dart or flutter tests to JUnit style XML
 
 homepage: https://github.com/TOPdesk/dart-junitreport
 documentation:
@@ -11,14 +9,14 @@ dependencies:
   args: ^1.6.0
   intl: ^0.16.1
   testreport: ^1.2.0
-  xml: ">=3.7.0 <5.0.0"
+  xml: '>=3.7.0 <5.0.0'
 
 dev_dependencies:
   pedantic: ^1.9.0
   test: any
 
 environment:
-  sdk: ">=2.7.0 <3.0.0"
+  sdk: '>=2.7.0 <3.0.0'
 
 executables:
   tojunit:
