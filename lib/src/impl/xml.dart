@@ -27,6 +27,13 @@ XmlAttribute attr(String name, dynamic value) =>
 
 XmlText txt(String text) => XmlText(text);
 
-String toXmlString(XmlDocument document) => document.toXmlString(pretty: true);
+String toXmlString(XmlDocument document) => document.toXmlString(
+      pretty: true,
+      preserveWhitespace: (XmlNode node) {
+        if (node is! XmlElement) return false;
+        return ['system-out', 'error', 'failure']
+            .contains((node as XmlElement).name.local);
+      },
+    );
 
 XmlName _name(String name) => XmlName.fromString(name);
