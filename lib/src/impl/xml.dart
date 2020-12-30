@@ -27,7 +27,8 @@ XmlAttribute attr(String name, dynamic value) =>
 
 XmlText txt(String text) => XmlText(text);
 
-String toXmlString(XmlDocument document) => document.toXmlString(
+String toXmlString(XmlDocument document) {
+  final result = document.toXmlString(
       pretty: true,
       preserveWhitespace: (XmlNode node) {
         if (node is! XmlElement) return false;
@@ -35,5 +36,9 @@ String toXmlString(XmlDocument document) => document.toXmlString(
             .contains((node as XmlElement).name.local);
       },
     );
+  // https://stackoverflow.com/questions/1176904/php-how-to-remove-all-non-printable-characters-in-a-string
+  // 0x0d \r 0x0a \n
+  return result.replaceAll(RegExp('[\x00-\x09\x0B-\x1F\x7F]'), '');
+}
 
 XmlName _name(String name) => XmlName.fromString(name);
