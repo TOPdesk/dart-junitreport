@@ -1,5 +1,5 @@
 name: junitreport
-version: 1.3.2-dev
+version: 1.4.0
 description: Generate JUnit XML reports from dart test runs. Transforms the output of dart or flutter tests to
   JUnit style XML
 
