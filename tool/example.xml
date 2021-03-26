@@ -12,7 +12,9 @@ and even
 two in one go</system-out>
     </testcase>
     <testcase classname="allresults" name="failing test" time="0.141">
-      <failure message="1 failure, see stacktrace for details">Failure:\n\nExpected: 'two\n'
+      <failure message="1 failure, see stacktrace for details">Failure:
+
+Expected: 'two\n'
   'lines for seeing how it is rendered'
   Actual: 'two\n'
   'lines that are not expected'
@@ -21,10 +23,17 @@ Expected: ... wo\nlines for seeing ...
   Actual: ... wo\nlines that are n ...
                         ^
  Differ at offset 11
+
+
+Stacktrace:
+package:test                                  expect
+tool\example-tests\allresults_test.dart 20:5  main.&lt;fn>
 </failure>
     </testcase>
     <testcase classname="allresults" name="failing test with reason" time="0.03">
-      <failure message="1 failure, see stacktrace for details">Failure:\n\nExpected: 'should fail'
+      <failure message="1 failure, see stacktrace for details">Failure:
+
+Expected: 'should fail'
   Actual: 'fails'
    Which: is different.
 Expected: should fai ...
@@ -32,6 +41,11 @@ Expected: should fai ...
           ^
  Differ at offset 0
 the failure reason
+
+
+Stacktrace:
+package:test                                  expect
+tool\example-tests\allresults_test.dart 25:5  main.&lt;fn>
 </failure>
     </testcase>
     <testcase classname="allresults" name="error in test" time="0.036">
@@ -39,13 +53,20 @@ the failure reason
 </error>
     </testcase>
     <testcase classname="allresults" name="error test and failure" time="0.037">
-      <failure message="1 failure, see stacktrace for details">Failure:\n\nExpected: 'expected1'
+      <failure message="1 failure, see stacktrace for details">Failure:
+
+Expected: 'expected1'
   Actual: 'actual1'
    Which: is different.
 Expected: expected1
   Actual: actual1
           ^
  Differ at offset 0
+
+
+Stacktrace:
+package:test                                  expect
+tool\example-tests\allresults_test.dart 33:5  main.&lt;fn>
 </failure>
     </testcase>
     <testcase classname="allresults" name="skipped top level test" time="0.00">

@@ -3,10 +3,10 @@
 // license that can be found in the LICENSE file.
 
 import 'package:intl/intl.dart';
-import 'package:xml/xml.dart';
-import 'package:testreport/testreport.dart';
 import 'package:junitreport/junitreport.dart';
 import 'package:junitreport/src/impl/xml.dart';
+import 'package:testreport/testreport.dart';
+import 'package:xml/xml.dart';
 
 class XmlReport implements JUnitReport {
   static final NumberFormat _milliseconds = NumberFormat('#####0.00#', 'en_US');
@@ -160,7 +160,6 @@ class XmlReport implements JUnitReport {
     } else {
       long = message;
     }
-    if (message.isNotEmpty && problem.isFailure) stacktrace = '';
 
     var report = <String>[];
     var type = problem.isFailure ? 'Failure' : 'Error';
@@ -171,7 +170,7 @@ class XmlReport implements JUnitReport {
     }
     if (long != null) report.add(long);
     if (stacktrace.isNotEmpty) report.add('Stacktrace:\n$stacktrace');
-    return report.join(r'\n\n');
+    return report.join('\n\n');
   }
 
   String _message(int failures, int errors) {

@@ -1,3 +1,7 @@
+## 1.4.0
+* always output stack trace for both test failures and errors
+* separate failure output sections with true newlines
+
 ## 1.3.1
 * updated dependencies:
   * xml: '^4.3.0'
