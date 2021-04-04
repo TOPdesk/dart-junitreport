@@ -11,14 +11,14 @@ import 'package:junitreport/junitreport.dart';
 import 'package:testreport/testreport.dart';
 
 Future<Null> main(List<String> args) async {
-  var arguments = parseArguments(args);
+  var arguments = parseArguments(args)!;
 
-  var lines = LineSplitter().bind(utf8.decoder.bind(arguments.source));
+  var lines = LineSplitter().bind(utf8.decoder.bind(arguments.source!));
   try {
     var report = await createReport(arguments, lines);
     var xml = JUnitReport(base: arguments.base, package: arguments.package)
         .toXml(report);
-    arguments.target.write(xml);
+    arguments.target!.write(xml);
   } catch (e) {
     stderr.writeln(e.toString());
     exit(1);
@@ -26,7 +26,7 @@ Future<Null> main(List<String> args) async {
 }
 
 Future<Report> createReport(Arguments arguments, Stream<String> lines) async {
-  var processor = Processor(timestamp: arguments.timestamp);
+  var processor = Processor(timestamp: arguments.timestamp!);
   await for (String line in lines) {
     if (!line.startsWith('{')) {
       continue;
@@ -36,7 +36,7 @@ Future<Report> createReport(Arguments arguments, Stream<String> lines) async {
   return processor.report;
 }
 
-Arguments parseArguments(List<String> args) {
+Arguments? parseArguments(List<String> args) {
   var parser = ArgParser()
     ..addOption('input', abbr: 'i', help: """
 the path to the 'json' file containing the output of 'pub run test'.
@@ -71,16 +71,15 @@ the timestamp to be used in the report
     if (result['help'] as bool) {
       print(parser.usage);
       exit(0);
-      return null; // satisfy code analyzers
     }
 
-    var source = _processInput(result['input'] as String);
-    var target = _processOutput(result['output'] as String);
+    var source = _processInput(result['input'] as String?)!;
+    var target = _processOutput(result['output'] as String?);
 
-    var timestamp = _processTimestamp(result['timestamp'] as String, source);
+    var timestamp = _processTimestamp(result['timestamp'] as String?, source);
     var package = _processPackage(result);
     return Arguments()
-      ..base = result['base'] as String
+      ..base = result['base'] as String?
       ..package = package
       ..timestamp = timestamp
       ..source = source.source
@@ -90,7 +89,6 @@ the timestamp to be used in the report
     print('\nValid program arguments: ');
     print(parser.usage);
     exit(1);
-    return null; // satisfy code analyzers
   }
 }
 
@@ -100,7 +98,7 @@ String _processPackage(ArgResults result) {
   return package;
 }
 
-DateTime _processTimestamp(String timestamp, _Source source) {
+DateTime? _processTimestamp(String? timestamp, _Source source) {
   if (timestamp == null) {
     return source.timestamp;
   }
@@ -115,7 +113,7 @@ DateTime _processTimestamp(String timestamp, _Source source) {
   }
 }
 
-_Source _processInput(String input) {
+_Source? _processInput(String? input) {
   if (input == null) {
     return _Source()
       ..source = stdin
@@ -125,7 +123,6 @@ _Source _processInput(String input) {
   if (!file.existsSync()) {
     stderr.writeln("File '$input' (${file.absolute.path}) does not exist");
     exit(1);
-    return null; // satisfy code analyzers
   }
   try {
     return _Source()
@@ -134,11 +131,10 @@ _Source _processInput(String input) {
   } catch (e) {
     stderr.writeln("Cannot read file '$input' (${file.absolute.path})");
     exit(1);
-    return null; // satisfy code analyzers
   }
 }
 
-IOSink _processOutput(String output) {
+IOSink? _processOutput(String? output) {
   if (output == null) return stdout;
   var file = File(output);
   try {
@@ -146,19 +142,18 @@ IOSink _processOutput(String output) {
   } catch (e) {
     stderr.writeln("Cannot write to file '$output' (${file.absolute.path})");
     exit(1);
-    return null; // satisfy code analyzers
   }
 }
 
 class Arguments {
-  Stream<List<int>> source;
-  IOSink target;
-  DateTime timestamp;
-  String base;
-  String package;
+  Stream<List<int>>? source;
+  IOSink? target;
+  DateTime? timestamp;
+  String? base;
+  String? package;
 }
 
 class _Source {
-  Stream<List<int>> source;
-  DateTime timestamp;
+  Stream<List<int>>? source;
+  DateTime? timestamp;
 }

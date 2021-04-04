@@ -32,7 +32,7 @@ String toXmlString(XmlDocument document) => document.toXmlString(
       preserveWhitespace: (XmlNode node) {
         if (node is! XmlElement) return false;
         return ['system-out', 'error', 'failure']
-            .contains((node as XmlElement).name.local);
+            .contains(node.name.local);
       },
     );
 
