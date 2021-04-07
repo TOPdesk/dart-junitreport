@@ -17,8 +17,8 @@ class XmlReport implements JUnitReport {
   static const Map<String, dynamic> _noAttributes = <String, dynamic>{};
   static const Iterable<XmlNode> _noChildren = <XmlNode>[];
 
-  final String base;
-  final String package;
+  final String? base;
+  final String? package;
 
   XmlReport(this.base, this.package);
 
@@ -83,18 +83,18 @@ class XmlReport implements JUnitReport {
       main = path;
     }
 
-    if (base.isNotEmpty && main.startsWith(base)) {
-      main = main.substring(base.length);
+    if (base!.isNotEmpty && main.startsWith(base!)) {
+      main = main.substring(base!.length);
       while (main.startsWith(_pathSeparator)) {
         main = main.substring(1);
       }
     }
-    return package +
+    return package! +
         main.replaceAll(_pathSeparator, '.').replaceAll(_dash, '_');
   }
 
   List<XmlNode> _suiteChildren(
-      String platform, Iterable<XmlNode> cases, Iterable<XmlNode> prints) {
+      String? platform, Iterable<XmlNode> cases, Iterable<XmlNode> prints) {
     var properties =
         platform == null ? <XmlNode>[] : <XmlNode>[(_properties(platform))];
     return properties..addAll(cases)..addAll(prints);
@@ -118,9 +118,9 @@ class XmlReport implements JUnitReport {
   XmlElement _problems(Iterable<Problem> problems) {
     if (problems.length == 1) {
       var problem = problems.first;
-      var message = problem.message;
+      final String? message = problem.message;
       if (message != null && !message.contains('\n')) {
-        var stacktrace = problem.stacktrace;
+        final String? stacktrace = problem.stacktrace;
         return elem(
             problem.isFailure ? 'failure' : 'error',
             <String, dynamic>{'message': message},
@@ -152,7 +152,7 @@ class XmlReport implements JUnitReport {
     var message = problem.message ?? '';
     var stacktrace = problem.stacktrace ?? '';
     var short = '';
-    String long;
+    String? long;
     if (message.isEmpty) {
       if (stacktrace.isEmpty) short = ' no details available';
     } else if (!message.contains('\n')) {
