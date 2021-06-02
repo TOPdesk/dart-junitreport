@@ -312,10 +312,12 @@ packages:
   testreport:
     dependency: "direct main"
     description:
-      name: testreport
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.2.0"
+      path: "."
+      ref: HEAD
+      resolved-ref: "1f9647bf3ac422ed0641ef26824ca03ce12e893a"
+      url: "https://github.com/trygvis/dart-testreport"
+    source: git
+    version: "2.0.0-dev"
   typed_data:
     dependency: transitive
     description:

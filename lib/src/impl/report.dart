@@ -28,7 +28,7 @@ class XmlReport implements JUnitReport {
     for (var suite in report.suites) {
       var cases = <XmlNode>[];
       var prints = <XmlNode>[];
-      var className = _pathToClassName(suite.path);
+      var className = _pathToClassName(suite.path ?? "");
 
       for (var test in suite.allTests) {
         if (test.isHidden) {
@@ -64,8 +64,9 @@ class XmlReport implements JUnitReport {
         'skipped': suite.skipped.length,
         'name': className
       };
-      if (report.timestamp != null) {
-        attributes['timestamp'] = _dateFormat.format(report.timestamp.toUtc());
+      var ts = report.timestamp;
+      if (ts != null) {
+        attributes['timestamp'] = _dateFormat.format(ts.toUtc());
       }
       suites.add(elem('testsuite', attributes,
           _suiteChildren(suite.platform, cases, prints)));
@@ -118,9 +119,9 @@ class XmlReport implements JUnitReport {
   XmlElement _problems(Iterable<Problem> problems) {
     if (problems.length == 1) {
       var problem = problems.first;
-      final String? message = problem.message;
+      final message = problem.message;
       if (message != null && !message.contains('\n')) {
-        final String? stacktrace = problem.stacktrace;
+        final stacktrace = problem.stacktrace;
         return elem(
             problem.isFailure ? 'failure' : 'error',
             <String, dynamic>{'message': message},
