@@ -71,7 +71,6 @@ the timestamp to be used in the report
     if (result['help'] as bool) {
       print(parser.usage);
       exit(0);
-      return null; // satisfy code analyzers
     }
 
     var source = _processInput(result['input'] as String);
@@ -82,7 +81,7 @@ the timestamp to be used in the report
     return Arguments()
       ..base = result['base'] as String
       ..package = package
-      ..timestamp = timestamp
+      ..timestamp = timestamp??DateTime.now()
       ..source = source.source
       ..target = target;
   } on FormatException catch (e) {
@@ -90,7 +89,6 @@ the timestamp to be used in the report
     print('\nValid program arguments: ');
     print(parser.usage);
     exit(1);
-    return null; // satisfy code analyzers
   }
 }
 
@@ -100,7 +98,7 @@ String _processPackage(ArgResults result) {
   return package;
 }
 
-DateTime _processTimestamp(String timestamp, _Source source) {
+DateTime? _processTimestamp(String? timestamp, _Source source) {
   if (timestamp == null) {
     return source.timestamp;
   }
@@ -115,7 +113,7 @@ DateTime _processTimestamp(String timestamp, _Source source) {
   }
 }
 
-_Source _processInput(String input) {
+_Source _processInput(String? input) {
   if (input == null) {
     return _Source()
       ..source = stdin
@@ -125,7 +123,6 @@ _Source _processInput(String input) {
   if (!file.existsSync()) {
     stderr.writeln("File '$input' (${file.absolute.path}) does not exist");
     exit(1);
-    return null; // satisfy code analyzers
   }
   try {
     return _Source()
@@ -134,11 +131,10 @@ _Source _processInput(String input) {
   } catch (e) {
     stderr.writeln("Cannot read file '$input' (${file.absolute.path})");
     exit(1);
-    return null; // satisfy code analyzers
   }
 }
 
-IOSink _processOutput(String output) {
+IOSink _processOutput(String? output) {
   if (output == null) return stdout;
   var file = File(output);
   try {
@@ -146,19 +142,18 @@ IOSink _processOutput(String output) {
   } catch (e) {
     stderr.writeln("Cannot write to file '$output' (${file.absolute.path})");
     exit(1);
-    return null; // satisfy code analyzers
   }
 }
 
 class Arguments {
-  Stream<List<int>> source;
-  IOSink target;
-  DateTime timestamp;
-  String base;
-  String package;
+  Stream<List<int>> source = Stream<List<int>>.empty();
+  IOSink target = stdout;
+  DateTime timestamp = DateTime.fromMillisecondsSinceEpoch(0);
+  String base = '';
+  String package = '';
 }
 
 class _Source {
-  Stream<List<int>> source;
-  DateTime timestamp;
+  Stream<List<int>> source = Stream<List<int>>.empty();
+  DateTime timestamp = DateTime.fromMillisecondsSinceEpoch(0);
 }

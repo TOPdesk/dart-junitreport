@@ -13,7 +13,7 @@ abstract class JUnitReport {
   ///
   /// To modify this path, [base] will be removed from it,
   /// and [package] will be prepended.
-  factory JUnitReport({String base, String package}) =>
+  factory JUnitReport({String base = '', String package = ''}) =>
       XmlReport(base, package);
 
   /// Transforms the given [Reports] to an xml String.
