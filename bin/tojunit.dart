@@ -1,4 +1,4 @@
-// Copyright (c) 2017-2019, TOPdesk. Please see the AUTHORS file for details.
+// Copyright (c) 2017-2021, TOPdesk. Please see the AUTHORS file for details.
 // All rights reserved. Use of this source code is governed by a MIT-style
 // license that can be found in the LICENSE file.
 
@@ -10,13 +10,13 @@ import 'package:intl/intl.dart';
 import 'package:junitreport/junitreport.dart';
 import 'package:testreport/testreport.dart';
 
-Future<Null> main(List<String> args) async {
-  var arguments = parseArguments(args);
+Future<void> main(List<String> args) async {
+  final arguments = parseArguments(args);
 
-  var lines = LineSplitter().bind(utf8.decoder.bind(arguments.source));
+  final lines = LineSplitter().bind(utf8.decoder.bind(arguments.source));
   try {
-    var report = await createReport(arguments, lines);
-    var xml = JUnitReport(base: arguments.base, package: arguments.package)
+    final report = await createReport(arguments, lines);
+    final xml = JUnitReport(base: arguments.base, package: arguments.package)
         .toXml(report);
     arguments.target.write(xml);
   } catch (e) {
@@ -26,8 +26,8 @@ Future<Null> main(List<String> args) async {
 }
 
 Future<Report> createReport(Arguments arguments, Stream<String> lines) async {
-  var processor = Processor(timestamp: arguments.timestamp);
-  await for (String line in lines) {
+  final processor = Processor(timestamp: arguments.timestamp);
+  await for (final line in lines) {
     if (!line.startsWith('{')) {
       continue;
     }
@@ -37,76 +37,91 @@ Future<Report> createReport(Arguments arguments, Stream<String> lines) async {
 }
 
 Arguments parseArguments(List<String> args) {
-  var parser = ArgParser()
-    ..addOption('input', abbr: 'i', help: """
+  final parser = ArgParser()
+    ..addOption(
+      'input',
+      abbr: 'i',
+      help: """
 the path to the 'json' file containing the output of 'pub run test'.
-if missing, <stdin> will be used""")
-    ..addOption('output', abbr: 'o', help: '''
+if missing, <stdin> will be used""",
+    )
+    ..addOption(
+      'output',
+      abbr: 'o',
+      help: '''
 the path of the to be generated junit xml file.
-if missing, <stdout> will be used''')
+if missing, <stdout> will be used''',
+    )
     ..addOption('base',
         abbr: 'b',
         help: "the part to strip from the 'path' elements in the source",
         defaultsTo: '')
-    ..addOption('package',
-        abbr: 'p',
-        help: "the part to prepend to the 'path' elements in the source",
-        defaultsTo: '')
-    ..addOption('timestamp', abbr: 't', help: """
+    ..addOption(
+      'package',
+      abbr: 'p',
+      help: "the part to prepend to the 'path' elements in the source",
+      defaultsTo: '',
+    )
+    ..addOption(
+      'timestamp',
+      abbr: 't',
+      help: """
 the timestamp to be used in the report
 - 'now' will use the current date/time
 - 'none' will suppress timestamps altogether
 - a date formatted 'yyyy-MM-ddThh:mm:ss' will be used as UTC date/time
 - if no value is provided
     - if '--input' is specified the file modification date/time is used
-    - otherwise the current date/time is used""")
-    ..addFlag('help',
-        abbr: 'h',
-        help: 'display this help text',
-        negatable: false,
-        defaultsTo: false);
+    - otherwise the current date/time is used""",
+    )
+    ..addFlag(
+      'help',
+      abbr: 'h',
+      help: 'display this help text',
+      negatable: false,
+      defaultsTo: false,
+    );
 
   try {
-    var result = parser.parse(args);
+    final result = parser.parse(args);
     if (result['help'] as bool) {
       print(parser.usage);
       exit(0);
-      return null; // satisfy code analyzers
     }
 
-    var source = _processInput(result['input'] as String);
-    var target = _processOutput(result['output'] as String);
+    final source = _processInput(result['input'] as String?);
+    final target = _processOutput(result['output'] as String?);
 
-    var timestamp = _processTimestamp(result['timestamp'] as String, source);
-    var package = _processPackage(result);
-    return Arguments()
-      ..base = result['base'] as String
-      ..package = package
-      ..timestamp = timestamp
-      ..source = source.source
-      ..target = target;
+    final timestamp = _processTimestamp(result['timestamp'] as String?, source);
+    final package = _processPackage(result);
+    return Arguments(
+      source.source,
+      target,
+      timestamp,
+      result['base'] as String,
+      package,
+    );
   } on FormatException catch (e) {
     stderr.writeln(e.message);
     print('\nValid program arguments: ');
     print(parser.usage);
     exit(1);
-    return null; // satisfy code analyzers
   }
 }
 
 String _processPackage(ArgResults result) {
-  var package = result['package'] as String;
-  if (package.isNotEmpty && !package.endsWith('.')) package += '.';
-  return package;
+  final package = result['package'] as String;
+  if (package.isEmpty || package.endsWith('.')) return package;
+  return '$package.';
 }
 
-DateTime _processTimestamp(String timestamp, _Source source) {
+DateTime? _processTimestamp(String? timestamp, _Source source) {
   if (timestamp == null) {
     return source.timestamp;
   }
   if (timestamp == 'none') return null;
   if (timestamp == 'now') return DateTime.now();
-  var format = DateFormat('yyyy-MM-ddTHH:mm:ss', 'en_US');
+  final format = DateFormat('yyyy-MM-ddTHH:mm:ss', 'en_US');
   try {
     return format.parseUtc(timestamp);
   } on FormatException {
@@ -115,50 +130,56 @@ DateTime _processTimestamp(String timestamp, _Source source) {
   }
 }
 
-_Source _processInput(String input) {
+_Source _processInput(String? input) {
   if (input == null) {
-    return _Source()
-      ..source = stdin
-      ..timestamp = DateTime.now();
+    return _Source(stdin, DateTime.now());
   }
-  var file = File(input);
+  final file = File(input);
   if (!file.existsSync()) {
     stderr.writeln("File '$input' (${file.absolute.path}) does not exist");
     exit(1);
-    return null; // satisfy code analyzers
   }
   try {
-    return _Source()
-      ..source = file.openRead()
-      ..timestamp = file.lastModifiedSync();
+    return _Source(
+      file.openRead(),
+      file.lastModifiedSync(),
+    );
   } catch (e) {
     stderr.writeln("Cannot read file '$input' (${file.absolute.path})");
     exit(1);
-    return null; // satisfy code analyzers
   }
 }
 
-IOSink _processOutput(String output) {
+IOSink _processOutput(String? output) {
   if (output == null) return stdout;
-  var file = File(output);
+  final file = File(output);
   try {
     return file.openWrite();
   } catch (e) {
     stderr.writeln("Cannot write to file '$output' (${file.absolute.path})");
     exit(1);
-    return null; // satisfy code analyzers
   }
 }
 
 class Arguments {
-  Stream<List<int>> source;
-  IOSink target;
-  DateTime timestamp;
-  String base;
-  String package;
+  final Stream<List<int>> source;
+  final IOSink target;
+  final DateTime? timestamp;
+  final String base;
+  final String package;
+
+  Arguments(
+    this.source,
+    this.target,
+    this.timestamp,
+    this.base,
+    this.package,
+  );
 }
 
 class _Source {
-  Stream<List<int>> source;
-  DateTime timestamp;
+  final Stream<List<int>> source;
+  final DateTime timestamp;
+
+  _Source(this.source, this.timestamp);
 }

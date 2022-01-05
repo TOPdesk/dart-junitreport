@@ -1,4 +1,4 @@
-// Copyright (c) 2017-2019, TOPdesk. Please see the AUTHORS file for details.
+// Copyright (c) 2017-2021, TOPdesk. Please see the AUTHORS file for details.
 // All rights reserved. Use of this source code is governed by a MIT-style
 // license that can be found in the LICENSE file.
 
@@ -24,23 +24,25 @@ class XmlReport implements JUnitReport {
 
   @override
   String toXml(Report report) {
-    var suites = <XmlNode>[];
-    for (var suite in report.suites) {
-      var cases = <XmlNode>[];
-      var prints = <XmlNode>[];
-      var className = _pathToClassName(suite.path);
+    final suites = <XmlNode>[];
+    for (final suite in report.suites) {
+      final cases = <XmlNode>[];
+      final prints = <XmlNode>[];
+      final className = _pathToClassName(suite.path);
 
-      for (var test in suite.allTests) {
+      for (final test in suite.allTests) {
         if (test.isHidden) {
           _prints(test.prints, prints);
           continue;
         }
 
-        var children = <XmlNode>[];
+        final children = <XmlNode>[];
         if (test.isSkipped) {
           children.add(elem('skipped', _noAttributes, _noChildren));
         }
-        if (test.problems.isNotEmpty) children.add(_problems(test.problems));
+        if (test.problems.isNotEmpty) {
+          children.add(_problems(test.problems));
+        }
 
         _prints(test.prints, children);
 
@@ -49,11 +51,11 @@ class XmlReport implements JUnitReport {
             <String, dynamic>{
               'classname': className,
               'name': test.name,
-              'time': _milliseconds.format((test.duration) / 1000.0)
+              'time': _milliseconds.format(test.duration / 1000.0)
             },
             children));
       }
-      var attributes = <String, dynamic>{
+      final attributes = <String, dynamic>{
         'errors': suite.problems
             .where((t) => !t.problems.every((p) => p.isFailure))
             .length,
@@ -65,7 +67,7 @@ class XmlReport implements JUnitReport {
         'name': className
       };
       if (report.timestamp != null) {
-        attributes['timestamp'] = _dateFormat.format(report.timestamp.toUtc());
+        attributes['timestamp'] = _dateFormat.format(report.timestamp!.toUtc());
       }
       suites.add(elem('testsuite', attributes,
           _suiteChildren(suite.platform, cases, prints)));
@@ -94,11 +96,15 @@ class XmlReport implements JUnitReport {
   }
 
   List<XmlNode> _suiteChildren(
-      String platform, Iterable<XmlNode> cases, Iterable<XmlNode> prints) {
-    var properties =
-        platform == null ? <XmlNode>[] : <XmlNode>[(_properties(platform))];
-    return properties..addAll(cases)..addAll(prints);
-  }
+    String? platform,
+    Iterable<XmlNode> cases,
+    Iterable<XmlNode> prints,
+  ) =>
+      <XmlNode>[
+        ..._properties(platform),
+        ...cases,
+        ...prints,
+      ];
 
   void _prints(Iterable<String> from, List<XmlNode> to) {
     if (from.isNotEmpty) {
@@ -107,30 +113,33 @@ class XmlReport implements JUnitReport {
     }
   }
 
-  XmlElement _properties(String platform) =>
-      elem('properties', _noAttributes, <XmlNode>[
-        elem(
-            'property',
-            <String, dynamic>{'name': 'platform', 'value': platform},
-            _noChildren)
-      ]);
+  List<XmlElement> _properties(String? platform) => platform == null
+      ? []
+      : [
+          elem('properties', _noAttributes, <XmlNode>[
+            elem(
+                'property',
+                <String, dynamic>{'name': 'platform', 'value': platform},
+                _noChildren)
+          ])
+        ];
 
   XmlElement _problems(Iterable<Problem> problems) {
     if (problems.length == 1) {
-      var problem = problems.first;
-      var message = problem.message;
-      if (message != null && !message.contains('\n')) {
-        var stacktrace = problem.stacktrace;
+      final problem = problems.first;
+      final message = problem.message;
+      if (!message.contains('\n')) {
+        final stacktrace = problem.stacktrace;
         return elem(
             problem.isFailure ? 'failure' : 'error',
             <String, dynamic>{'message': message},
-            stacktrace == null ? _noChildren : <XmlNode>[txt(stacktrace)]);
+            stacktrace.isEmpty ? _noChildren : <XmlNode>[txt(stacktrace)]);
       }
     }
 
-    var failures = problems.where((p) => p.isFailure);
-    var errors = problems.where((p) => !p.isFailure);
-    var details = <String>[
+    final failures = problems.where((p) => p.isFailure);
+    final errors = problems.where((p) => !p.isFailure);
+    final details = <String>[
       ..._details(failures),
       ..._details(errors),
     ];
@@ -149,10 +158,10 @@ class XmlReport implements JUnitReport {
   }
 
   String _report(bool more, int index, Problem problem) {
-    var message = problem.message ?? '';
-    var stacktrace = problem.stacktrace ?? '';
+    final message = problem.message;
+    var stacktrace = problem.stacktrace;
     var short = '';
-    String long;
+    String? long;
     if (message.isEmpty) {
       if (stacktrace.isEmpty) short = ' no details available';
     } else if (!message.contains('\n')) {
@@ -162,8 +171,8 @@ class XmlReport implements JUnitReport {
     }
     if (message.isNotEmpty && problem.isFailure) stacktrace = '';
 
-    var report = <String>[];
-    var type = problem.isFailure ? 'Failure' : 'Error';
+    final report = <String>[];
+    final type = problem.isFailure ? 'Failure' : 'Error';
     if (more) {
       report.add('$type #$index:$short');
     } else {
@@ -175,7 +184,7 @@ class XmlReport implements JUnitReport {
   }
 
   String _message(int failures, int errors) {
-    var texts = <String>[];
+    final texts = <String>[];
     if (failures == 1) texts.add('1 failure');
     if (failures > 1) texts.add('$failures failures');
     if (errors == 1) texts.add('1 error');
