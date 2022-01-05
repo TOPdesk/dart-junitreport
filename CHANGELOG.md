@@ -1,3 +1,12 @@
+## 2.0.0
+* null-safety
+* require dart 2.14+
+* updated dependencies:
+  * args: ^2.3.0
+  * intl: ^0.17.0
+  * testreport: ^2.0.1
+  * xml: ^5.3.1
+
 ## 1.3.1
 * updated dependencies:
   * xml: '^4.3.0'
