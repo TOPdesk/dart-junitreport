@@ -11,4 +11,4 @@ or after running `dart pub global activate junitreport`:
 dart test simple_test.dart --reporter json | tojunit > TEST-report.xml
 ```
 
-See `dart pub global run junitreport:tojunit --help` or simply `tojunit -h` for all supprted command line flags. 
+See `dart pub global run junitreport:tojunit --help` or simply `tojunit -h` for all supported command line flags. 
