@@ -13,8 +13,8 @@ This application can be used to convert the results of dart tests to JUnit xml r
 By running
 
 ```Shell
-pub run test simple_test.dart --reporter json > example.jsonl
-pub global run junitreport:tojunit --input example.jsonl --output TEST-report.xml
+dart test simple_test.dart --reporter json > example.jsonl
+dart pub global run junitreport:tojunit --input example.jsonl --output TEST-report.xml
 ```
 
 and the contents of `simple_test.dart` is
@@ -47,7 +47,7 @@ For transforming Flutter tests reports, instead of passing `--reporter json`, yo
 Installation
 ------------
 
-Run `pub global activate junitreport` to download the program and make a launch script available: `<dart-cache>/bin/tojunit`.
+Run `dart pub global activate junitreport` to download the program and make a launch script available: `<dart-cache>/bin/tojunit`.
 
 If the `<dart-cache>/bin` directory is not on your path, you will get a warning, including tips on how to fix it.
 
@@ -56,7 +56,7 @@ Once the directory is on your path, `tojunit --help` should be able to run and p
 Then you can also use the example above much simpler:
 
 ```Shell
-pub run test simple_test.dart --reporter json | tojunit
+dart test simple_test.dart --reporter json | tojunit
 ```
 
 And to run all tests for Flutter:
