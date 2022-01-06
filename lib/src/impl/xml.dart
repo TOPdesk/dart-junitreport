@@ -27,7 +27,8 @@ XmlAttribute attr(String name, dynamic value) =>
 
 XmlText txt(String text) => XmlText(text);
 
-String toXmlString(XmlDocument document) => document.toXmlString(
+String toXmlString(XmlDocument document) => document
+    .toXmlString(
       pretty: true,
       preserveWhitespace: (XmlNode node) {
         if (node is! XmlElement) return false;
@@ -37,6 +38,18 @@ String toXmlString(XmlDocument document) => document.toXmlString(
           'failure',
         ].contains(node.name.local);
       },
-    );
+    )
+    .replaceAllMapped(_highlyDiscouraged, _mapDiscouraged);
+
+// Lists all C0 and C1 control codes except NUL, HT, LF, CR and NEL
+final _highlyDiscouraged = RegExp(
+    '[\u0001-\u0008\u000b\u000c\u000e-\u001f\u007f-\u0084\u0086-\u009f]',
+    unicode: true);
+
+String _mapDiscouraged(Match match) => match
+    .group(0)!
+    .codeUnits
+    .map((unit) => '&#$unit;')
+    .join();
 
 XmlName _name(String name) => XmlName.fromString(name);

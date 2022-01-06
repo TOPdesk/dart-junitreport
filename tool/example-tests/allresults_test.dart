@@ -16,6 +16,11 @@ void main() {
     expect('', '');
   });
 
+  test('output with control character ', () {
+    print('a\t tab should be fine but bell not \u0008!');
+    expect('', '');
+  });
+
   test('failing test', () {
     expect('two\nlines that are not expected',
         'two\nlines for seeing how it is rendered');

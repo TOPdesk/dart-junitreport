@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testsuites>
-  <testsuite errors="1" failures="3" tests="7" skipped="1" name="allresults">
+  <testsuite errors="1" failures="3" tests="8" skipped="1" name="allresults">
     <properties>
       <property name="platform" value="vm"/>
     </properties>
     <testcase classname="allresults" name="successful test" time="0.019"/>
-    <testcase classname="allresults" name="successful test with output" time="0.01">
+    <testcase classname="allresults" name="successful test with output" time="0.009">
       <system-out>a printed line
 and another on printed line
 and even
 two in one go</system-out>
+    </testcase>
+    <testcase classname="allresults" name="output with control character " time="0.001">
+      <system-out>a	 tab should be fine but bell not &#8;!</system-out>
     </testcase>
     <testcase classname="allresults" name="failing test" time="0.014">
       <failure message="1 failure, see stacktrace for details">Failure:\n\nExpected: 'two\n'
@@ -23,7 +26,7 @@ two in one go</system-out>
            Differ at offset 11
 </failure>
     </testcase>
-    <testcase classname="allresults" name="failing test with reason" time="0.002">
+    <testcase classname="allresults" name="failing test with reason" time="0.003">
       <failure message="1 failure, see stacktrace for details">Failure:\n\nExpected: 'should fail'
   Actual: 'fails'
    Which: is different.
@@ -35,7 +38,7 @@ the failure reason
 </failure>
     </testcase>
     <testcase classname="allresults" name="error in test" time="0.002">
-      <error message="Bad state: oops, it failed">tool\example-tests\allresults_test.dart 29:5  main.&lt;fn>
+      <error message="Bad state: oops, it failed">tool\example-tests\allresults_test.dart 34:5  main.&lt;fn>
 </error>
     </testcase>
     <testcase classname="allresults" name="error test and failure" time="0.002">
