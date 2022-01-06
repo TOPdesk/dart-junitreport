@@ -15,7 +15,9 @@ two in one go</system-out>
       <system-out>a	 tab should be fine but bell not &#8;!</system-out>
     </testcase>
     <testcase classname="allresults" name="failing test" time="0.014">
-      <failure message="1 failure, see stacktrace for details">Failure:\n\nExpected: 'two\n'
+      <failure message="1 failure, see stacktrace for details">Failure:
+
+Expected: 'two\n'
             'lines for seeing how it is rendered'
   Actual: 'two\n'
             'lines that are not expected'
@@ -27,7 +29,9 @@ two in one go</system-out>
 </failure>
     </testcase>
     <testcase classname="allresults" name="failing test with reason" time="0.003">
-      <failure message="1 failure, see stacktrace for details">Failure:\n\nExpected: 'should fail'
+      <failure message="1 failure, see stacktrace for details">Failure:
+
+Expected: 'should fail'
   Actual: 'fails'
    Which: is different.
           Expected: should fai ...
@@ -42,7 +46,9 @@ the failure reason
 </error>
     </testcase>
     <testcase classname="allresults" name="error test and failure" time="0.002">
-      <failure message="1 failure, see stacktrace for details">Failure:\n\nExpected: 'expected1'
+      <failure message="1 failure, see stacktrace for details">Failure:
+
+Expected: 'expected1'
   Actual: 'actual1'
    Which: is different.
           Expected: expected1

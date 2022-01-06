@@ -180,7 +180,7 @@ class XmlReport implements JUnitReport {
     }
     if (long != null) report.add(long);
     if (stacktrace.isNotEmpty) report.add('Stacktrace:\n$stacktrace');
-    return report.join(r'\n\n');
+    return report.join('\n\n');
   }
 
   String _message(int failures, int errors) {
