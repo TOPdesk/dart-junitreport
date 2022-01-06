@@ -1,3 +1,8 @@
+## 2.0.2
+* bugfixes
+  * flutter test would sometimes emit a \u0001 character, and now most control characters are xml-escaped
+  * use newlines instead of the text '\n\n'
+
 ## 2.0.1
 * documentation update
 

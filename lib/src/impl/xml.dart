@@ -46,10 +46,7 @@ final _highlyDiscouraged = RegExp(
     '[\u0001-\u0008\u000b\u000c\u000e-\u001f\u007f-\u0084\u0086-\u009f]',
     unicode: true);
 
-String _mapDiscouraged(Match match) => match
-    .group(0)!
-    .codeUnits
-    .map((unit) => '&#$unit;')
-    .join();
+String _mapDiscouraged(Match match) =>
+    match.group(0)!.codeUnits.map((unit) => '&#$unit;').join();
 
 XmlName _name(String name) => XmlName.fromString(name);
