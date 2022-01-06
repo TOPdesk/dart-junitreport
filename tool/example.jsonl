@@ -1,35 +1,36 @@
-{"protocolVersion":"0.1.0","runnerVersion":"0.12.13+1","type":"start","time":0}
-{"count":2,"type":"allSuites","time":0}
-{"suite":{"id":0,"platform":"vm","path":"tool\\example-tests\\allresults_test.dart"},"type":"suite","time":0}
-{"test":{"id":1,"name":"loading tool\\example-tests\\allresults_test.dart","suiteID":0,"groupIDs":[],"metadata":{"skip":false,"skipReason":null}},"type":"testStart","time":0}
-{"suite":{"id":2,"platform":"vm","path":"tool\\example-tests\\simple_test.dart"},"type":"suite","time":3}
-{"test":{"id":3,"name":"loading tool\\example-tests\\simple_test.dart","suiteID":2,"groupIDs":[],"metadata":{"skip":false,"skipReason":null}},"type":"testStart","time":3}
-{"testID":1,"message":"a print outside any test","type":"print","time":260}
-{"testID":3,"result":"success","hidden":true,"type":"testDone","time":275}
-{"group":{"id":4,"suiteID":2,"parentID":null,"name":null,"metadata":{"skip":false,"skipReason":null},"testCount":1},"type":"group","time":278}
-{"test":{"id":5,"name":"simple","suiteID":2,"groupIDs":[4],"metadata":{"skip":false,"skipReason":null}},"type":"testStart","time":278}
-{"testID":1,"result":"success","hidden":true,"type":"testDone","time":279}
-{"group":{"id":6,"suiteID":0,"parentID":null,"name":null,"metadata":{"skip":false,"skipReason":null},"testCount":7},"type":"group","time":280}
-{"test":{"id":7,"name":"succesful test","suiteID":0,"groupIDs":[6],"metadata":{"skip":false,"skipReason":null}},"type":"testStart","time":280}
-{"testID":7,"result":"success","hidden":false,"type":"testDone","time":306}
-{"testID":5,"result":"success","hidden":false,"type":"testDone","time":306}
-{"test":{"id":8,"name":"succesful test with output","suiteID":0,"groupIDs":[6],"metadata":{"skip":false,"skipReason":null}},"type":"testStart","time":306}
-{"testID":8,"message":"a printed line","type":"print","time":309}
-{"testID":8,"message":"and another on printed line","type":"print","time":309}
-{"testID":8,"message":"and even\ntwo in one go","type":"print","time":309}
-{"testID":8,"result":"success","hidden":false,"type":"testDone","time":309}
-{"test":{"id":9,"name":"failing test","suiteID":0,"groupIDs":[6],"metadata":{"skip":false,"skipReason":null}},"type":"testStart","time":309}
-{"testID":9,"error":"Expected: 'two\\n'\n  'lines for seeing how it is rendered'\n  Actual: 'two\\n'\n  'lines that are not expected'\n   Which: is different.\nExpected: ... wo\\nlines for seeing ...\n  Actual: ... wo\\nlines that are n ...\n                        ^\n Differ at offset 11\n","stackTrace":"package:test                                  expect\ntool\\example-tests\\allresults_test.dart 20:5  main.<fn>\n","isFailure":true,"type":"error","time":450}
-{"testID":9,"result":"failure","hidden":false,"type":"testDone","time":450}
-{"test":{"id":10,"name":"failing test with reason","suiteID":0,"groupIDs":[6],"metadata":{"skip":false,"skipReason":null}},"type":"testStart","time":450}
-{"testID":10,"error":"Expected: 'should fail'\n  Actual: 'fails'\n   Which: is different.\nExpected: should fai ...\n  Actual: fails\n          ^\n Differ at offset 0\nthe failure reason\n","stackTrace":"package:test                                  expect\ntool\\example-tests\\allresults_test.dart 25:5  main.<fn>\n","isFailure":true,"type":"error","time":479}
-{"testID":10,"result":"failure","hidden":false,"type":"testDone","time":480}
-{"test":{"id":11,"name":"error in test","suiteID":0,"groupIDs":[6],"metadata":{"skip":false,"skipReason":null}},"type":"testStart","time":480}
-{"testID":11,"error":"Bad state: oops, it failed","stackTrace":"tool\\example-tests\\allresults_test.dart 29:5  main.<fn>\n","isFailure":false,"type":"error","time":515}
-{"testID":11,"result":"error","hidden":false,"type":"testDone","time":516}
-{"test":{"id":12,"name":"error test and failure","suiteID":0,"groupIDs":[6],"metadata":{"skip":false,"skipReason":null}},"type":"testStart","time":516}
-{"testID":12,"error":"Expected: 'expected1'\n  Actual: 'actual1'\n   Which: is different.\nExpected: expected1\n  Actual: actual1\n          ^\n Differ at offset 0\n","stackTrace":"package:test                                  expect\ntool\\example-tests\\allresults_test.dart 33:5  main.<fn>\n","isFailure":true,"type":"error","time":552}
-{"testID":12,"result":"failure","hidden":false,"type":"testDone","time":553}
-{"test":{"id":13,"name":"skipped top level test","suiteID":0,"groupIDs":[6],"metadata":{"skip":true,"skipReason":"reason for skipping"}},"type":"testStart","time":554}
-{"testID":13,"result":"success","hidden":false,"type":"testDone","time":554}
-{"success":false,"type":"done","time":555}
+{"protocolVersion":"0.1.1","runnerVersion":"1.20.1","pid":24444,"type":"start","time":0}
+{"suite":{"id":0,"platform":"vm","path":"tool/example-tests\\allresults_test.dart"},"type":"suite","time":0}
+{"test":{"id":1,"name":"loading tool/example-tests\\allresults_test.dart","suiteID":0,"groupIDs":[],"metadata":{"skip":false,"skipReason":null},"line":null,"column":null,"url":null},"type":"testStart","time":1}
+{"suite":{"id":2,"platform":"vm","path":"tool/example-tests\\simple_test.dart"},"type":"suite","time":8}
+{"test":{"id":3,"name":"loading tool/example-tests\\simple_test.dart","suiteID":2,"groupIDs":[],"metadata":{"skip":false,"skipReason":null},"line":null,"column":null,"url":null},"type":"testStart","time":8}
+{"count":2,"time":10,"type":"allSuites"}
+{"testID":1,"messageType":"print","message":"a print outside any test","type":"print","time":824}
+{"testID":1,"result":"success","skipped":false,"hidden":true,"type":"testDone","time":881}
+{"group":{"id":4,"suiteID":0,"parentID":null,"name":"","metadata":{"skip":false,"skipReason":null},"testCount":7,"line":null,"column":null,"url":null},"type":"group","time":884}
+{"test":{"id":5,"name":"successful test","suiteID":0,"groupIDs":[4],"metadata":{"skip":false,"skipReason":null},"line":8,"column":3,"url":"ROOT/tool/example-tests/allresults_test.dart"},"type":"testStart","time":885}
+{"testID":3,"result":"success","skipped":false,"hidden":true,"type":"testDone","time":886}
+{"group":{"id":6,"suiteID":2,"parentID":null,"name":"","metadata":{"skip":false,"skipReason":null},"testCount":1,"line":null,"column":null,"url":null},"type":"group","time":887}
+{"test":{"id":7,"name":"simple","suiteID":2,"groupIDs":[6],"metadata":{"skip":false,"skipReason":null},"line":8,"column":3,"url":"ROOT/tool/example-tests/simple_test.dart"},"type":"testStart","time":887}
+{"testID":5,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":904}
+{"testID":7,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":904}
+{"test":{"id":8,"name":"successful test with output","suiteID":0,"groupIDs":[4],"metadata":{"skip":false,"skipReason":null},"line":12,"column":3,"url":"ROOT/tool/example-tests/allresults_test.dart"},"type":"testStart","time":904}
+{"testID":8,"messageType":"print","message":"a printed line","type":"print","time":913}
+{"testID":8,"messageType":"print","message":"and another on printed line","type":"print","time":913}
+{"testID":8,"messageType":"print","message":"and even\ntwo in one go","type":"print","time":913}
+{"testID":8,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":914}
+{"test":{"id":9,"name":"failing test","suiteID":0,"groupIDs":[4],"metadata":{"skip":false,"skipReason":null},"line":19,"column":3,"url":"ROOT/tool/example-tests/allresults_test.dart"},"type":"testStart","time":914}
+{"testID":9,"error":"Expected: 'two\\n'\n            'lines for seeing how it is rendered'\n  Actual: 'two\\n'\n            'lines that are not expected'\n   Which: is different.\n          Expected: ... wo\\nlines for seeing ...\n            Actual: ... wo\\nlines that are n ...\n                                  ^\n           Differ at offset 11\n","stackTrace":"package:test_api                              expect\ntool\\example-tests\\allresults_test.dart 20:5  main.<fn>\n","isFailure":true,"type":"error","time":927}
+{"testID":9,"result":"failure","skipped":false,"hidden":false,"type":"testDone","time":928}
+{"test":{"id":10,"name":"failing test with reason","suiteID":0,"groupIDs":[4],"metadata":{"skip":false,"skipReason":null},"line":24,"column":3,"url":"ROOT/tool/example-tests/allresults_test.dart"},"type":"testStart","time":928}
+{"testID":10,"error":"Expected: 'should fail'\n  Actual: 'fails'\n   Which: is different.\n          Expected: should fai ...\n            Actual: fails\n                    ^\n           Differ at offset 0\nthe failure reason\n","stackTrace":"package:test_api                              expect\ntool\\example-tests\\allresults_test.dart 25:5  main.<fn>\n","isFailure":true,"type":"error","time":930}
+{"testID":10,"result":"failure","skipped":false,"hidden":false,"type":"testDone","time":930}
+{"test":{"id":11,"name":"error in test","suiteID":0,"groupIDs":[4],"metadata":{"skip":false,"skipReason":null},"line":28,"column":3,"url":"ROOT/tool/example-tests/allresults_test.dart"},"type":"testStart","time":930}
+{"testID":11,"error":"Bad state: oops, it failed","stackTrace":"tool\\example-tests\\allresults_test.dart 29:5  main.<fn>\n","isFailure":false,"type":"error","time":932}
+{"testID":11,"result":"error","skipped":false,"hidden":false,"type":"testDone","time":932}
+{"test":{"id":12,"name":"error test and failure","suiteID":0,"groupIDs":[4],"metadata":{"skip":false,"skipReason":null},"line":32,"column":3,"url":"ROOT/tool/example-tests/allresults_test.dart"},"type":"testStart","time":932}
+{"testID":12,"error":"Expected: 'expected1'\n  Actual: 'actual1'\n   Which: is different.\n          Expected: expected1\n            Actual: actual1\n                    ^\n           Differ at offset 0\n","stackTrace":"package:test_api                              expect\ntool\\example-tests\\allresults_test.dart 33:5  main.<fn>\n","isFailure":true,"type":"error","time":934}
+{"testID":12,"result":"failure","skipped":false,"hidden":false,"type":"testDone","time":934}
+{"test":{"id":13,"name":"skipped top level test","suiteID":0,"groupIDs":[4],"metadata":{"skip":true,"skipReason":"reason for skipping"},"line":37,"column":3,"url":"ROOT/tool/example-tests/allresults_test.dart"},"type":"testStart","time":935}
+{"testID":13,"messageType":"skip","message":"Skip: reason for skipping","type":"print","time":935}
+{"testID":13,"result":"success","skipped":true,"hidden":false,"type":"testDone","time":935}
+{"success":false,"type":"done","time":938}

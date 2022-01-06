@@ -4,52 +4,53 @@
     <properties>
       <property name="platform" value="vm"/>
     </properties>
-    <testcase classname="allresults" name="succesful test" time="0.026"/>
-    <testcase classname="allresults" name="succesful test with output" time="0.003">
+    <testcase classname="allresults" name="successful test" time="0.019"/>
+    <testcase classname="allresults" name="successful test with output" time="0.01">
       <system-out>a printed line
 and another on printed line
 and even
 two in one go</system-out>
     </testcase>
-    <testcase classname="allresults" name="failing test" time="0.141">
+    <testcase classname="allresults" name="failing test" time="0.014">
       <failure message="1 failure, see stacktrace for details">Failure:\n\nExpected: 'two\n'
-  'lines for seeing how it is rendered'
+            'lines for seeing how it is rendered'
   Actual: 'two\n'
-  'lines that are not expected'
+            'lines that are not expected'
    Which: is different.
-Expected: ... wo\nlines for seeing ...
-  Actual: ... wo\nlines that are n ...
-                        ^
- Differ at offset 11
+          Expected: ... wo\nlines for seeing ...
+            Actual: ... wo\nlines that are n ...
+                                  ^
+           Differ at offset 11
 </failure>
     </testcase>
-    <testcase classname="allresults" name="failing test with reason" time="0.03">
+    <testcase classname="allresults" name="failing test with reason" time="0.002">
       <failure message="1 failure, see stacktrace for details">Failure:\n\nExpected: 'should fail'
   Actual: 'fails'
    Which: is different.
-Expected: should fai ...
-  Actual: fails
-          ^
- Differ at offset 0
+          Expected: should fai ...
+            Actual: fails
+                    ^
+           Differ at offset 0
 the failure reason
 </failure>
     </testcase>
-    <testcase classname="allresults" name="error in test" time="0.036">
+    <testcase classname="allresults" name="error in test" time="0.002">
       <error message="Bad state: oops, it failed">tool\example-tests\allresults_test.dart 29:5  main.&lt;fn>
 </error>
     </testcase>
-    <testcase classname="allresults" name="error test and failure" time="0.037">
+    <testcase classname="allresults" name="error test and failure" time="0.002">
       <failure message="1 failure, see stacktrace for details">Failure:\n\nExpected: 'expected1'
   Actual: 'actual1'
    Which: is different.
-Expected: expected1
-  Actual: actual1
-          ^
- Differ at offset 0
+          Expected: expected1
+            Actual: actual1
+                    ^
+           Differ at offset 0
 </failure>
     </testcase>
     <testcase classname="allresults" name="skipped top level test" time="0.00">
       <skipped/>
+      <system-out>Skip: reason for skipping</system-out>
     </testcase>
     <system-out>a print outside any test</system-out>
   </testsuite>
@@ -57,6 +58,6 @@ Expected: expected1
     <properties>
       <property name="platform" value="vm"/>
     </properties>
-    <testcase classname="simple" name="simple" time="0.028"/>
+    <testcase classname="simple" name="simple" time="0.017"/>
   </testsuite>
 </testsuites>
