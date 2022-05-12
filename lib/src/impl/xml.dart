@@ -5,7 +5,7 @@
 import 'package:xml/xml.dart';
 
 XmlDocument doc(Iterable<XmlNode> children) => XmlDocument([
-      XmlProcessing('xml', 'version="1.0" encoding="UTF-8"'),
+      XmlProcessing('xml', 'version="1.1" encoding="UTF-8"'),
       ...children,
     ]);
 
